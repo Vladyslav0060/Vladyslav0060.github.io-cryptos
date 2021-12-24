@@ -1,26 +1,43 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-
-function App() {
+import { FC, useContext, useEffect } from "react";
+import "./App.css";
+import { Navbar } from "./components/navbar";
+import { ThemeContext } from "./context/ThemeContext";
+import { Types } from "./reducers/themeReducer";
+import { TrashContext } from "./context/TrashContext";
+import { actionTypes } from "./reducers/trashReducer";
+const App = () => {
+  // const {
+  //   state: { theme },
+  //   dispatch,
+  // } = useContext(ThemeContext);
+  // console.log(theme);
+  const {
+    state: { trashBoxes },
+    dispatch,
+  } = useContext(TrashContext);
+  console.log(trashBoxes);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+      <Navbar />
+      <div>
+        {/* <button
+          onClick={() => dispatch({ type: Types.SET_THEME, payload: "dark" })}
         >
-          Learn React
-        </a>
-      </header>
+          TEST
+        </button> */}
+        {/* <button
+          onClick={() =>
+            dispatch({
+              type: actionTypes.ADD_TRASHBOX,
+              payload: { id: 10, name: "rubbis-2", weight: 13 },
+            })
+          }
+        >
+          TEST
+        </button> */}
+      </div>
     </div>
   );
-}
+};
 
 export default App;
