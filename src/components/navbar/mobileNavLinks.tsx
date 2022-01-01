@@ -21,6 +21,7 @@ const LinksWrapper = styled.ul`
   position: fixed;
   top: 65px;
   left: 0;
+  z-index: 100;
 `;
 
 const LinkItem = styled.li`

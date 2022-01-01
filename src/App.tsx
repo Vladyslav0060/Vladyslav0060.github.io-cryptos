@@ -5,6 +5,7 @@ import { ThemeContext } from "./context/ThemeContext";
 import { Types } from "./reducers/themeReducer";
 import { TrashContext } from "./context/TrashContext";
 import { actionTypes } from "./reducers/trashReducer";
+import Footer from "./components/footer/Footer";
 const App = () => {
   // const {
   //   state: { theme },
@@ -36,6 +37,7 @@ const App = () => {
           TEST
         </button> */}
       </div>
+      <Footer />
     </div>
   );
 };

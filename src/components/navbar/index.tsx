@@ -7,6 +7,7 @@ import { DeviceSize } from "../responsive";
 import MobileNavLinks from "./mobileNavLinks";
 import { BrowserRouter as Router, Route, Link, Routes } from "react-router-dom";
 import CoinList from "../pages/CoinList";
+import HomePage from "../pages/HomePage";
 import { FC } from "react";
 const NavbarContainer = styled.div`
   width: 100%;
@@ -44,7 +45,7 @@ export function Navbar() {
         </RightSection>
       </NavbarContainer>
       <Routes>
-        <Route path="/" element={<>Home page</>} />
+        <Route path="/" element={<HomePage />} />
         <Route path="/p1" element={<CoinList />} />
         <Route path="/p2" element={<>page2</>} />
         <Route path="/p3" element={<>page3</>} />
