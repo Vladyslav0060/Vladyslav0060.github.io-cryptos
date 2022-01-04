@@ -9,6 +9,8 @@ import { BrowserRouter as Router, Route, Link, Routes } from "react-router-dom";
 import CoinList from "../pages/CoinList";
 import HomePage from "../pages/HomePage";
 import { FC } from "react";
+import Charts from "../pages/Charts";
+import TestChart from "../pages/TestChart";
 const NavbarContainer = styled.div`
   width: 100%;
   background-color: white;
@@ -47,8 +49,8 @@ export function Navbar() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/p1" element={<CoinList />} />
-        <Route path="/p2" element={<>page2</>} />
-        <Route path="/p3" element={<>page3</>} />
+        <Route path="/p2" element={<Charts />} />
+        <Route path="/p3" element={<TestChart />} />
         <Route path="/login" element={<>login</>} />
         <Route path="/register" element={<>register</>} />
       </Routes>
