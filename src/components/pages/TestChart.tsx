@@ -1,100 +1,113 @@
-import { FC, useEffect, useRef } from "react";
-import { createChart } from "lightweight-charts";
-console.log(
-  'document.querySelector(".chart-container")',
-  document.querySelector(".chart-container")
-);
-
+import { FC, useEffect, useRef, useState } from "react";
+import { createChart, ISeriesApi, CrosshairMode } from "lightweight-charts";
+import axios from "axios";
+import Collapsible from "react-collapsible";
+const cors = require("cors");
+let candlesData: any = [];
 const TestChart: FC = () => {
-  let chart = {};
+  // let chart: ISeriesApi<"Area"> = {};
+  // let chart: any;
+  const chart: any = useRef();
   const refContainer: any = useRef();
+  const resizeObserver: any = useRef();
+  const candlestickSeries: any = useRef();
+  const [isCollapsed, setIsCollapsed] = useState(false);
+  const fetchData = async () => {
+    const response: any = await axios({
+      method: "get",
+      url: "https://api.coincap.io/v2/candles?exchange=poloniex&interval=m15&baseId=bitcoin&quoteId=trueusd",
+      params: {
+        Autorization: "Bearer c01e24fe-4a5e-4f7c-b2e1-aaf157181e11 ",
+      },
+    });
+    response.data.data.forEach((el: any) => {
+      candlesData.push({
+        time: parseInt(el["period"].toString().slice(0, -3)),
+        close: el["close"],
+        high: el["high"],
+        low: el["low"],
+        open: el["open"],
+      });
+    });
+    candlestickSeries.current.setData(candlesData);
+  };
   useEffect(() => {
-    chart = createChart(
-      // document.querySelector(".chart-container"),
-      refContainer.current,
-      {
-        width: 800,
-        height: 500,
-      }
-    );
-    //@ts-ignore;
-    const areaSeries = chart.addAreaSeries();
-    areaSeries.setData([
-      { time: "2018-12-22", value: 32.51 },
-      { time: "2018-12-23", value: 31.11 },
-      { time: "2018-12-24", value: 27.02 },
-      { time: "2018-12-25", value: 27.32 },
-      { time: "2018-12-26", value: 25.17 },
-      { time: "2018-12-27", value: 28.89 },
-      { time: "2018-12-28", value: 25.46 },
-      { time: "2018-12-29", value: 23.92 },
-      { time: "2018-12-30", value: 22.68 },
-      { time: "2018-12-31", value: 22.67 },
-    ]);
-
-    //@ts-ignore;
-    const candlestickSeries = chart.addCandlestickSeries();
-    candlestickSeries.setData([
-      {
-        time: "2018-12-22",
-        open: 75.16,
-        high: 82.84,
-        low: 36.16,
-        close: 45.72,
+    chart.current = createChart(refContainer.current, {
+      width: refContainer.current.clientWidth,
+      height: refContainer.current.clientHeight,
+      // width: refContainer.current.innerWidth,
+      // height: refContainer.current.innerHeight,
+      layout: {
+        backgroundColor: "#253248",
+        textColor: "rgba(255, 255, 255, 0.9)",
       },
-      { time: "2018-12-23", open: 45.12, high: 53.9, low: 45.12, close: 48.09 },
-      {
-        time: "2018-12-24",
-        open: 60.71,
-        high: 60.71,
-        low: 53.39,
-        close: 59.29,
+      rightPriceScale: {
+        autoScale: true,
+        scaleMargins: {
+          top: 0.05,
+          bottom: 0.05,
+        },
       },
-      { time: "2018-12-25", open: 68.26, high: 68.26, low: 59.04, close: 60.5 },
-      {
-        time: "2018-12-26",
-        open: 67.71,
-        high: 105.85,
-        low: 66.67,
-        close: 91.04,
+      grid: {
+        vertLines: {
+          color: "#334158",
+        },
+        horzLines: {
+          color: "#334158",
+        },
       },
-      { time: "2018-12-27", open: 91.04, high: 121.4, low: 82.7, close: 111.4 },
-      {
-        time: "2018-12-28",
-        open: 111.51,
-        high: 142.83,
-        low: 103.34,
-        close: 131.25,
+      timeScale: {
+        timeVisible: true,
+        borderColor: "#485c7b",
+        secondsVisible: false,
       },
-      {
-        time: "2018-12-29",
-        open: 131.33,
-        high: 151.17,
-        low: 77.68,
-        close: 96.43,
-      },
-      {
-        time: "2018-12-30",
-        open: 106.33,
-        high: 110.2,
-        low: 90.39,
-        close: 98.1,
-      },
-      {
-        time: "2018-12-31",
-        open: 109.87,
-        high: 114.69,
-        low: 85.66,
-        close: 111.26,
-      },
-    ]);
+    });
+    candlestickSeries.current = chart.current.addCandlestickSeries();
+    // const candlestickSeries = chart.addCandlestickSeries();
+    fetchData();
   }, []);
+  useEffect(() => {
+    resizeObserver.current = new ResizeObserver((entries) => {
+      const { width, height } = entries[0].contentRect;
+      chart.current.applyOptions({
+        width: width,
+        height: height,
+      });
+    });
 
+    resizeObserver.current.observe(refContainer.current);
+
+    return () => resizeObserver.current.disconnect();
+  }, []);
   return (
-    <>
-      {/* <div className={`chart-container`}></div> */}
-      <div ref={refContainer} style={{ marginTop: "100px" }} />
-    </>
+    <div
+      style={{
+        display: "flex",
+        height: "93.5vh",
+        position: "relative",
+        flexDirection: "column",
+      }}
+    >
+      <Collapsible trigger={"Config menu ▼"}>
+        <div>hello</div>
+      </Collapsible>
+      <div
+        ref={refContainer}
+        style={{
+          minHeight: "500px",
+          width: "100%",
+          height: "100%",
+          position: "relative",
+        }}
+        // style={{
+        //   height: "100%",
+        //   maxHeight: "99.99%",
+        //   width: "100%",
+        //   minHeight: "70vh",
+        //   zIndex: "0",
+        // }}
+      />
+    </div>
   );
 };
 export default TestChart;
