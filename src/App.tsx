@@ -26,7 +26,7 @@ const App = () => {
         >
           TEST
         </button> */}
-        {/* <button
+        <button
           onClick={() =>
             dispatch({
               type: actionTypes.ADD_TRASHBOX,
@@ -35,7 +35,7 @@ const App = () => {
           }
         >
           TEST
-        </button> */}
+        </button>
       </div>
       <Footer />
     </div>

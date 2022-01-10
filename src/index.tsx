@@ -4,10 +4,13 @@ import App from "./App";
 import "antd/dist/antd.css";
 import { ThemeProvider } from "./context/ThemeContext";
 import { TrashProvider } from "./context/TrashContext";
+import { AppProvider } from "./context/AppContext";
 ReactDOM.render(
   <ThemeProvider>
     <TrashProvider>
-      <App />
+      <AppProvider>
+        <App />
+      </AppProvider>
     </TrashProvider>
   </ThemeProvider>,
   document.getElementById("root")

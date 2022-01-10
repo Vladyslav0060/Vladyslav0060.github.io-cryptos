@@ -1,35 +1,70 @@
-import { FC, useEffect, useRef, useState } from "react";
+import { FC, useEffect, useRef, useState, useContext } from "react";
 import { createChart, ISeriesApi, CrosshairMode } from "lightweight-charts";
+import { actionTypes } from "../../reducers/AppReducer";
+import { AppContext } from "../../context/AppContext";
+import { Menu, Dropdown } from "antd";
+import { DownOutlined } from "@ant-design/icons";
 import axios from "axios";
 import Collapsible from "react-collapsible";
 const cors = require("cors");
 let candlesData: any = [];
+// const periods = [m1, m5, m15, m30, h1, h2, h6, h12, d1];
 const TestChart: FC = () => {
-  // let chart: ISeriesApi<"Area"> = {};
-  // let chart: any;
+  const {
+    state: { symbols },
+    dispatch,
+  } = useContext(AppContext);
+  console.log(symbols);
+  // useEffect(() => {
+  //   console.log(symbols);
+  // }, [symbols]);
   const chart: any = useRef();
   const refContainer: any = useRef();
   const resizeObserver: any = useRef();
   const candlestickSeries: any = useRef();
-  const [isCollapsed, setIsCollapsed] = useState(false);
-  const fetchData = async () => {
-    const response: any = await axios({
+  const [period, setPeriod] = useState("m5");
+  const [symbol, setSymbol] = useState("bitcoin");
+  const onPeriodsClick = (e: any) => {
+    setPeriod(e.key);
+  };
+  const getSymbols = async () => {
+    const res: any = await axios({
       method: "get",
-      url: "https://api.coincap.io/v2/candles?exchange=poloniex&interval=m15&baseId=bitcoin&quoteId=trueusd",
+      url: "http://localhost:5000/coin/symbols",
+    });
+
+    console.log(res.data);
+    return res.data;
+  };
+  useEffect(() => {
+    getSymbols();
+  }, []);
+  const periodsDropdownMenu = (
+    <Menu onClick={onPeriodsClick}>
+      <Menu.Item key="m1">1 min</Menu.Item>
+      <Menu.Item key="m5">5 min</Menu.Item>
+      <Menu.Item key="m15">15 min</Menu.Item>
+      <Menu.Item key="m30">30 min</Menu.Item>
+      <Menu.Item key="h1">1 hour</Menu.Item>
+      <Menu.Item key="h2">2 hours</Menu.Item>
+      <Menu.Item key="h6">6 hours</Menu.Item>
+      <Menu.Item key="h12">12 hours</Menu.Item>
+      <Menu.Item key="d1">1 day</Menu.Item>
+    </Menu>
+  );
+
+  const fetchData = async () => {
+    const res: any = await axios({
+      method: "get",
+      url: "http://localhost:5000/coin/ohlc",
       params: {
-        Autorization: "Bearer c01e24fe-4a5e-4f7c-b2e1-aaf157181e11 ",
+        interval: period,
+        baseId: symbol,
+        quoteId: "trueusd",
       },
     });
-    response.data.data.forEach((el: any) => {
-      candlesData.push({
-        time: parseInt(el["period"].toString().slice(0, -3)),
-        close: el["close"],
-        high: el["high"],
-        low: el["low"],
-        open: el["open"],
-      });
-    });
-    candlestickSeries.current.setData(candlesData);
+    const { ohlcData, volumesData } = res.data;
+    candlestickSeries.current.setData(ohlcData);
   };
   useEffect(() => {
     chart.current = createChart(refContainer.current, {
@@ -88,9 +123,33 @@ const TestChart: FC = () => {
         flexDirection: "column",
       }}
     >
-      <Collapsible trigger={"Config menu ▼"}>
+      {/* <Collapsible trigger={"Config menu ▼"}>
         <div>hello</div>
-      </Collapsible>
+      </Collapsible> */}
+      <div
+        style={{
+          height: "30px",
+          backgroundColor: "black",
+          color: "white",
+          textAlign: "left",
+        }}
+      >
+        <Dropdown overlay={periodsDropdownMenu} trigger={["click"]}>
+          <a className="ant-dropdown-link" onClick={(e) => e.preventDefault()}>
+            Periods <DownOutlined />
+          </a>
+        </Dropdown>
+        <button
+          onClick={() => {
+            dispatch({
+              type: actionTypes.ADD_SYMBOLS,
+              payload: { id: "test", symbol: "testSymbol" },
+            });
+          }}
+        >
+          but
+        </button>
+      </div>
       <div
         ref={refContainer}
         style={{
