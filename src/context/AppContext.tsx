@@ -55,7 +55,7 @@ import {
   initStateType,
 } from "../reducers/AppReducer";
 const initState = {
-  symbols: [{ id: "nuss", symbol: "nussss" }],
+  symbols: [],
 };
 export const AppContext = createContext<{
   state: initStateType;

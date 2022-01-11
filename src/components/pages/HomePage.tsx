@@ -1,5 +1,9 @@
 import { FC } from "react";
 const HomePage: FC = () => {
-  return <div>This is my homepage</div>;
+  return (
+    <div style={{ height: "95vh", backgroundColor: "grey" }}>
+      This is my homepage
+    </div>
+  );
 };
 export default HomePage;
