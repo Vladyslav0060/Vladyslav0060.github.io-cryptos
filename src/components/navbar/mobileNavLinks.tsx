@@ -25,6 +25,7 @@ const LinksWrapper = styled.ul`
 `;
 
 const LinkItem = styled.li`
+  color: white;
   width: 100%;
   padding: 0 1.1em;
   color: #222;
@@ -61,18 +62,23 @@ export function MobileNavLinks() {
             </Link>
           </LinkItem>
           <LinkItem>
-            <Link className="link-text" to="/p1" onClick={clickHandler}>
-              Page 1
+            <Link className="link-text" to="/exchange">
+              Exchange
             </Link>
           </LinkItem>
           <LinkItem>
-            <Link className="link-text" to="/p2" onClick={clickHandler}>
-              Page 2
+            <Link className="link-text" to="/p1" onClick={clickHandler}>
+              Coins
             </Link>
           </LinkItem>
           <LinkItem>
             <Link className="link-text" to="/p3" onClick={clickHandler}>
-              Page 3
+              Charts
+            </Link>
+          </LinkItem>
+          <LinkItem>
+            <Link className="link-text" to="/p2" onClick={clickHandler}>
+              Contact me
             </Link>
           </LinkItem>
           <Marginer />

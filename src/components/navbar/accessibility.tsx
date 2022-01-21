@@ -16,13 +16,15 @@ const RegisterButton = styled.button`
   font-size: 13px;
   font-weight: 600;
   border-radius: 20px;
-  background-color: #6adf76;
-  background-image: linear-gradient(to right, transparent 0%, #00c9ff 100%);
+  background-color: #3a3497;
+  background-image: linear-gradient(to left, transparent 0%, #38bb9dc4 100%);
   transition: all 240ms ease-in-out;
   cursor: pointer;
 
   &:hover {
-    background-color: #00c9ff;
+    color: black;
+    background-color: orange;
+    background-image: linear-gradient(to right, transparent 0%, yellow 100%);
   }
 
   &:not(:last-of-type) {
@@ -34,20 +36,20 @@ const LoginButton = styled.button`
   border: 0;
   outline: 0;
   padding: 8px 1em;
-  color: #222;
+  color: #fff;
   font-size: 13px;
   font-weight: 600;
   border-radius: 20px;
-  background-color: transparent;
-  border: 2px solid #00c9ff;
+  background-color: #3a3497;
+  background-image: linear-gradient(to right, transparent 0%, #d042ff 100%);
   transition: all 240ms ease-in-out;
   cursor: pointer;
 
   &:hover {
-    color: #fff;
-    background-color: #00c9ff;
+    color: black;
+    background-color: orange;
+    background-image: linear-gradient(to right, transparent 0%, yellow 100%);
   }
-
   &:not(:last-of-type) {
     margin-right: 7px;
   }
@@ -62,13 +64,13 @@ export function Accessibility(props: IAccessibility) {
   return (
     <AccessibilityContainer>
       <RegisterButton>
-        <Link className="link-text" to="/register" onClick={clickHandler}>
+        <Link className="right-link-text" to="/register" onClick={clickHandler}>
           Register
         </Link>
       </RegisterButton>
 
       <LoginButton>
-        <Link className="link-text" to="/login" onClick={clickHandler}>
+        <Link className="right-link-text" to="/login" onClick={clickHandler}>
           Login
         </Link>
       </LoginButton>

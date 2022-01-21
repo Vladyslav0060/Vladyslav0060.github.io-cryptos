@@ -56,6 +56,7 @@ import {
 } from "../reducers/AppReducer";
 const initState = {
   symbols: [],
+  isContactModalOpen: false,
 };
 export const AppContext = createContext<{
   state: initStateType;

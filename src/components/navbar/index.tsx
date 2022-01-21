@@ -11,9 +11,10 @@ import HomePage from "../pages/HomePage";
 import { FC } from "react";
 import Charts from "../pages/Charts";
 import TestChart from "../pages/TestChart";
+import Exchange from "../pages/Exchange";
 const NavbarContainer = styled.div`
   width: 100%;
-  background-color: white;
+  background-color: black;
   height: 60px;
   box-shadow: 0 1px 3px rgba(15, 15, 15, 0.13);
   display: flex;
@@ -48,8 +49,8 @@ export function Navbar() {
       </NavbarContainer>
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/exchange" element={<Exchange />} />
         <Route path="/p1" element={<CoinList />} />
-        <Route path="/p2" element={<Charts />} />
         <Route path="/p3" element={<TestChart />} />
         <Route path="/login" element={<>login</>} />
         <Route path="/register" element={<>register</>} />

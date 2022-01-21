@@ -1,5 +1,8 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { AppContext } from "../../context/AppContext";
+import { actionTypes } from "../../reducers/AppReducer";
 const NavLinksContainer = styled.div`
   height: 100%;
   display: flex;
@@ -15,9 +18,10 @@ const LinksWrapper = styled.ul`
 `;
 
 const LinkItem = styled.li`
+  color: white;
   height: 100%;
   padding: 0 1.1em;
-  color: #222;
+  // color: #222;
   font-weight: 500;
   font-size: 14px;
   align-items: center;
@@ -27,7 +31,8 @@ const LinkItem = styled.li`
   transition: all 220ms ease-in-out;
 
   &:hover {
-    border-top: 2px solid #2ecc71;
+    // border-top: 2px solid #2ecc71;
+    border-top: 2px solid #14bba7;
   }
 `;
 
@@ -38,28 +43,44 @@ const LinkItem = styled.li`
 // `;
 
 export function NavLinks() {
+  const {
+    state: { isContactModalOpen },
+    dispatch,
+  } = useContext(AppContext);
   return (
     <NavLinksContainer>
       <LinksWrapper>
+        <label>
+          <LinkItem>
+            <Link className="link-text" to="/">
+              Home
+            </Link>
+          </LinkItem>
+        </label>
         <LinkItem>
-          <Link className="link-text" to="/">
-            Home
+          <Link className="link-text" to="/exchange">
+            Exchange
           </Link>
         </LinkItem>
         <LinkItem>
           <Link className="link-text" to="/p1">
-            Page 1
-          </Link>
-        </LinkItem>
-        <LinkItem>
-          <Link className="link-text" to="/p2">
-            Page 2
+            Coins
           </Link>
         </LinkItem>
         <LinkItem>
           <Link className="link-text" to="/p3">
-            Page 3
+            Charts
           </Link>
+        </LinkItem>
+        <LinkItem
+          onClick={() =>
+            dispatch({
+              type: actionTypes.SET_IS_CONTACT_MODAL_OPEN,
+              payload: !isContactModalOpen,
+            })
+          }
+        >
+          <span className="link-text">Contact me</span>
         </LinkItem>
       </LinksWrapper>
     </NavLinksContainer>

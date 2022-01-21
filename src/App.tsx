@@ -1,43 +1,13 @@
-import { FC, useContext, useEffect } from "react";
 import "./App.css";
 import { Navbar } from "./components/navbar";
-import { ThemeContext } from "./context/ThemeContext";
-import { Types } from "./reducers/themeReducer";
-import { TrashContext } from "./context/TrashContext";
-import { actionTypes } from "./reducers/trashReducer";
-import Footer from "./components/footer/Footer";
+import Modal from "react-modal";
+import ContactMe from "./components/pages/ContactMe";
 const App = () => {
-  // const {
-  //   state: { theme },
-  //   dispatch,
-  // } = useContext(ThemeContext);
-  // console.log(theme);
-  const {
-    state: { trashBoxes },
-    dispatch,
-  } = useContext(TrashContext);
-  console.log(trashBoxes);
+  Modal.setAppElement("#root");
   return (
     <div className="App">
       <Navbar />
-      <div>
-        {/* <button
-          onClick={() => dispatch({ type: Types.SET_THEME, payload: "dark" })}
-        >
-          TEST
-        </button> */}
-        {/* <button
-          onClick={() =>
-            dispatch({
-              type: actionTypes.ADD_TRASHBOX,
-              payload: { id: 10, name: "rubbis-2", weight: 13 },
-            })
-          }
-        >
-          TEST
-        </button> */}
-      </div>
-      <Footer />
+      <ContactMe />
     </div>
   );
 };

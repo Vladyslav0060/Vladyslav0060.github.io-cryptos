@@ -13,7 +13,11 @@ let firstPrice = 0,
   secondPrice = 0;
 let filtered: ICoinRequest[] = [];
 const TextField = styled.input`
-  background-color: red;
+  // background-color: "white";
+  // border-radius: 5px;
+  border-radius: 3px;
+  background: white;
+  border: none;
 `;
 const columns: any = [
   {
@@ -101,33 +105,34 @@ const CoinList: FC = () => {
   const isMobile = useMediaQuery({ maxWidth: DeviceSize.mobile });
   useEffect(() => {
     request(process.env.REACT_APP_COINMARKET_URL);
+    let timer = setInterval(() => {
+      console.log("new req");
+      request(process.env.REACT_APP_COINMARKET_URL);
+    }, 20000);
+    return () => clearInterval(timer);
   }, []);
   const request = async (url: string | undefined) => {
     if (url != undefined) {
-      const response = await axios.get(url);
+      // const response = await axios.get(url);
+      const response = await axios.get("http://localhost:5000/coin/assets");
       console.log(response.data);
-      response.data.map((item: ICoinRequest) => {
-        if (item.id === firstName) firstPrice = item.current_price;
-        else if (item.id === secondName) secondPrice = item.current_price;
-      });
-      if (firstPrice != 0 && secondPrice != 0)
-        console.log("Result of converting: ", firstPrice / secondPrice);
-      setInterval(() => {
-        setFetchedData(response.data);
-      }, 500);
+      // console.log(response.data);
+      // response.data.map((item: ICoinRequest) => {
+      //   if (item.id === firstName) firstPrice = item.current_price;
+      //   else if (item.id === secondName) secondPrice = item.current_price;
+      // });
+      // if (firstPrice != 0 && secondPrice != 0)
+      //   console.log("Result of converting: ", firstPrice / secondPrice);
+      setFetchedData(response.data);
     }
   };
-  {
-    /* {fetchedData.map((item) => (
-        <Coin key={item.id} item={item} />
-      ))} */
-  }
+
   const handleChange = (e: any) => {
     setSearchField(e.target.value);
   };
 
   return (
-    <>
+    <div className="coinlist-wrapper" style={{ backgroundColor: "black" }}>
       <div
         style={
           isMobile
@@ -137,11 +142,13 @@ const CoinList: FC = () => {
                 marginRight: "15%",
                 padding: "10px",
                 height: "100%",
+                // backgroundColor: "black",
               }
         }
       >
         {/* <div style={{ display: "flex", justifyContent: "center" }}> */}
         <Table
+          // className="custom-table"
           title={() => (
             // <input placeholder="Search" onChange={handleChange}
             <TextField onChange={handleChange} />
@@ -156,11 +163,9 @@ const CoinList: FC = () => {
                 )
           }
           rowKey="name"
-          // onChange={onChange}
         />
-        {/* </div> */}
       </div>
-    </>
+    </div>
   );
 };
 export default CoinList;
