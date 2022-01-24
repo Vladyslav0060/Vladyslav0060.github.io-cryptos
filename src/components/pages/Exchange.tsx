@@ -1,12 +1,15 @@
 import { FC, useEffect, useState, useContext } from "react";
 import { AppContext } from "../../context/AppContext";
 import axios from "axios";
-import { Dropdown, Menu } from "antd";
+import { Dropdown, Menu, Spin } from "antd";
 import Modal from "../exchange-components/Modal";
 import { faSyncAlt } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { LoadingOutlined } from "@ant-design/icons";
+import { motion } from "framer-motion";
+import FramerWrapper from "../wrapper/FramerWrapper";
 // let [symbols, setSymbols]: any = [];
-
+const antLoadingIcon = <LoadingOutlined style={{ color: "white" }} spin />;
 const Exchange: FC = () => {
   let isInitial = true;
   let [symbolDropdownMenu, setSymbolDropdownMenu]: any = useState();
@@ -20,6 +23,7 @@ const Exchange: FC = () => {
   const [symbols, setSymbols]: any = useState();
   const [amount, setAmount]: any = useState(1);
   const [isRotating, setIsRotating]: any = useState();
+  const [isLoading, setIsLoading]: any = useState(true);
   const onSymbolsClick = (e: any) => {
     console.log(e);
   };
@@ -43,10 +47,11 @@ const Exchange: FC = () => {
   }, [symbols]);
 
   const request = async () => {
+    console.log("request");
+    const result = await axios("http://localhost:5000/coin/assetsExchange");
+    if (result.status === 200) setIsLoading(false);
+    setResponse(result.data);
     if (isInitial) {
-      const result = await axios("http://localhost:5000/coin/assetsExchange");
-      setResponse(result.data);
-      console.log(result.data);
       setFirstSymbol(result.data[0]);
       setSecondSymbol(result.data[1]);
       const temp = result?.data?.map((el: any) => el.symbol);
@@ -55,7 +60,8 @@ const Exchange: FC = () => {
     isInitial = false;
   };
   useEffect(() => {
-    request();
+    const interval = setInterval(() => request(), 2000);
+    return () => clearInterval(interval);
   }, []);
   useEffect(() => {
     if (firstSymbol === undefined || secondSymbol === undefined) return;
@@ -82,88 +88,111 @@ const Exchange: FC = () => {
     setTimeout(() => setIsRotating(false), 250);
   };
   return (
-    <div className="exchange-wrapper">
-      <div className="exchange-form">
-        <div className="exchange-col">
-          <Modal
-            opened={modalsOpened.first}
-            setOpened={setModalsOpened}
-            nModal={1}
-            symbols={response}
-            currentSymbol={firstSymbol}
-            setCurrentSymbol={setFirstSymbol}
-          />
-          <button
-            onClick={() =>
-              setModalsOpened((prevState) => ({
-                ...prevState,
-                first: !modalsOpened.first,
-              }))
-            }
+    <FramerWrapper>
+      <div className="exchange-wrapper">
+        {isLoading ? (
+          <div
+            className="exchange-form"
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
           >
-            {firstSymbol?.id.toUpperCase() +
-              "(" +
-              firstSymbol?.symbol.toUpperCase() +
-              ") ▼"}
-          </button>
-          <img
-            src={firstSymbol?.image}
-            style={{ width: "15vw", height: "15vw" }}
-          />
-          {/* -------------------------------------------- */}
-        </div>
-        <div className="exchange-col">
-          <input
-            type="number"
-            onChange={(e) => setAmount(e.target.value)}
-            value={amount}
-            style={{ width: "50%", color: "white" }}
-          />
-          <FontAwesomeIcon
-            className={isRotating ? "faSyncAlt-active" : "faSyncAlt"}
-            icon={faSyncAlt}
-            size="6x"
-            color="black"
-            onClick={switchCoins}
-            style={{ width: "15vw", cursor: "pointer" }}
-          />
-          {/* <h1>{(amount * firstSymbol?.price) / secondSymbol?.price}</h1> */}
-          <input
-            type="number"
-            onChange={(e) => setAmount(e.target.value)}
-            value={roundNumber()}
-            style={{ width: "50%", color: "white" }}
-          />
-        </div>
-        <div className="exchange-col">
-          <Modal
-            opened={modalsOpened.second}
-            setOpened={setModalsOpened}
-            nModal={2}
-            symbols={response}
-            currentSymbol={secondSymbol}
-            setCurrentSymbol={setSecondSymbol}
-          />
-          <button
-            onClick={() =>
-              setModalsOpened((prevState) => ({
-                ...prevState,
-                second: !modalsOpened.second,
-              }))
-            }
-          >
-            {secondSymbol?.id.toUpperCase() +
-              "(" +
-              secondSymbol?.symbol.toUpperCase() +
-              ") ▼"}
-          </button>
-          <img
-            src={secondSymbol?.image}
-            style={{ width: "15vw", height: "15vw" }}
-          />
-        </div>
+            <Spin size="large" indicator={antLoadingIcon} />
+          </div>
+        ) : (
+          <div className="exchange-form">
+            {/* <Spin className="exchange-form" spinning={isLoading} indicator={antLoadingIcon}> */}
+            <div className="exchange-col">
+              <Modal
+                opened={modalsOpened.first}
+                setOpened={setModalsOpened}
+                nModal={1}
+                symbols={response}
+                currentSymbol={firstSymbol}
+                setCurrentSymbol={setFirstSymbol}
+              />
+              <button
+                onClick={() =>
+                  setModalsOpened((prevState) => ({
+                    ...prevState,
+                    first: !modalsOpened.first,
+                  }))
+                }
+              >
+                {firstSymbol?.id.toUpperCase() +
+                  "(" +
+                  firstSymbol?.symbol.toUpperCase() +
+                  ") ▼"}
+              </button>
+              {/* <Spin style={{ width: "15vw", height: "15vw", marginTop: "10px" }} /> */}
+              <img
+                src={firstSymbol?.image}
+                style={{ width: "15vw", height: "15vw" }}
+              />
+              {/* -------------------------------------------- */}
+            </div>
+            <div className="exchange-col">
+              <input
+                type="number"
+                onChange={(e) => {
+                  if (parseFloat(e.target.value) >= 0)
+                    setAmount(e.target.value);
+                  else if (e.target.value === "") setAmount(0);
+                  return;
+                }}
+                value={amount}
+                style={{ width: "50%", color: "white" }}
+              />
+              <FontAwesomeIcon
+                className={isRotating ? "faSyncAlt-active" : "faSyncAlt"}
+                icon={faSyncAlt}
+                size="6x"
+                color="black"
+                onClick={switchCoins}
+                style={{ width: "15vw", cursor: "pointer" }}
+              />
+              {/* <h1>{(amount * firstSymbol?.price) / secondSymbol?.price}</h1> */}
+              <input
+                type="number"
+                onChange={(e) => setAmount(e.target.value)}
+                value={roundNumber()}
+                style={{ width: "50%", color: "white" }}
+              />
+            </div>
+            <div className="exchange-col">
+              <Modal
+                opened={modalsOpened.second}
+                setOpened={setModalsOpened}
+                nModal={2}
+                symbols={response}
+                currentSymbol={secondSymbol}
+                setCurrentSymbol={setSecondSymbol}
+              />
+              <button
+                onClick={() =>
+                  setModalsOpened((prevState) => ({
+                    ...prevState,
+                    second: !modalsOpened.second,
+                  }))
+                }
+              >
+                {secondSymbol?.id.toUpperCase() +
+                  "(" +
+                  secondSymbol?.symbol.toUpperCase() +
+                  ") ▼"}
+              </button>
+              <img
+                src={secondSymbol?.image}
+                style={{ width: "15vw", height: "15vw" }}
+              />
+            </div>
+            {/* </Spin> */}
+          </div>
+        )}
       </div>
-    </div>
+    </FramerWrapper>
   );
 };
 export default Exchange;

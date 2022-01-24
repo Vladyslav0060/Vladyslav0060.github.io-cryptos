@@ -7,6 +7,7 @@ import { useMediaQuery } from "react-responsive";
 import styled from "styled-components";
 import Coin from "../Coin";
 import Footer from "../footer/Footer";
+import FramerWrapper from "../wrapper/FramerWrapper";
 let firstName = "bitcoin",
   secondName = "ethereum";
 let firstPrice = 0,
@@ -132,40 +133,42 @@ const CoinList: FC = () => {
   };
 
   return (
-    <div className="coinlist-wrapper" style={{ backgroundColor: "black" }}>
-      <div
-        style={
-          isMobile
-            ? {}
-            : {
-                marginLeft: "15%",
-                marginRight: "15%",
-                padding: "10px",
-                height: "100%",
-                // backgroundColor: "black",
-              }
-        }
-      >
-        {/* <div style={{ display: "flex", justifyContent: "center" }}> */}
-        <Table
-          // className="custom-table"
-          title={() => (
-            // <input placeholder="Search" onChange={handleChange}
-            <TextField onChange={handleChange} />
-          )}
-          loading={fetchedData.length ? false : true}
-          columns={columns}
-          dataSource={
-            searchField === ""
-              ? fetchedData
-              : fetchedData.filter((coin) =>
-                  coin.name.toLowerCase().includes(searchField.toLowerCase())
-                )
+    <FramerWrapper>
+      <div className="coinlist-wrapper" style={{ backgroundColor: "black" }}>
+        <div
+          style={
+            isMobile
+              ? {}
+              : {
+                  marginLeft: "15%",
+                  marginRight: "15%",
+                  padding: "10px",
+                  height: "100%",
+                  // backgroundColor: "black",
+                }
           }
-          rowKey="name"
-        />
+        >
+          {/* <div style={{ display: "flex", justifyContent: "center" }}> */}
+          <Table
+            // className="custom-table"
+            title={() => (
+              // <input placeholder="Search" onChange={handleChange}
+              <TextField onChange={handleChange} />
+            )}
+            loading={fetchedData.length ? false : true}
+            columns={columns}
+            dataSource={
+              searchField === ""
+                ? fetchedData
+                : fetchedData.filter((coin) =>
+                    coin.name.toLowerCase().includes(searchField.toLowerCase())
+                  )
+            }
+            rowKey="name"
+          />
+        </div>
       </div>
-    </div>
+    </FramerWrapper>
   );
 };
 export default CoinList;

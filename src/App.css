@@ -10,11 +10,16 @@
   text-decoration: none;
   color: inherit;
   font-size: inherit;
+  cursor: pointer;
 }
-.link-text:hover {
+.link-text-active {
+  border-top: 2px solid #14bba7;
+  color: red;
+}
+/* .link-text:hover {
   cursor: pointer;
   color: rgb(21, 199, 253);
-}
+} */
 .right-link-text {
   text-decoration: none;
   color: inherit;
@@ -48,7 +53,7 @@
 .home-wrapper {
   position: relative;
   width: 100%;
-  height: 93vh;
+  height: calc(100vh - 60px);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -99,7 +104,10 @@
   border-radius: 20px !important;
 }
 .ant-table-title {
+  text-align: center;
   background: rgba(30, 2, 56, 0.87) !important;
+  border-top-right-radius: 20px !important;
+  border-top-left-radius: 20px !important;
 }
 .ant-table-thead {
   color: red;
@@ -127,7 +135,7 @@
   border-color: rgb(45, 26, 63) !important;
 }
 .exchange-wrapper {
-  height: 92vh;
+  height: calc(100vh - 60px);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -197,7 +205,7 @@ input {
 }
 @keyframes spin {
   100% {
-    transform: rotate(-180deg);
+    transform: rotate(180deg);
   }
 }
 .faSyncAlt-active {
@@ -218,4 +226,121 @@ input {
   100% {
     background-position: 100% 0%;
   }
+}
+
+/* .login-form {
+  display: flex;
+  width: 350px;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  background-color: lightcoral;
+  height: 500px;
+}
+.login-form div {
+  width: 100%;
+}
+.login-form div input {
+  justify-self: flex-end;
+  width: 60%;
+  margin: 10px;
+  padding: 5px;
+} */
+.page-wrapper {
+  height: calc(100vh - 60px);
+  display: flex;
+  color: white;
+  justify-content: center;
+  align-items: center;
+}
+.page-wrapper code {
+  color: red;
+}
+.center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  background: rgb(105, 68, 173);
+  border-radius: 10px;
+}
+.center h1 {
+  text-align: center;
+  padding: 10px 0 10px 0;
+  border-bottom: 1px solid rgb(42, 30, 63);
+  color: white;
+}
+.center form {
+  padding: 0 40px 20px;
+  box-sizing: border-box;
+}
+form .txt-field {
+  position: relative;
+  /* border-bottom: 1px solid #31015d; */
+  margin: 15px 0;
+}
+form input {
+  margin: 10px 0;
+}
+.txt-field input {
+  width: 100%;
+  padding: 0 5px;
+  height: 40px;
+  font-size: 16px;
+  border: none;
+  background: none;
+  outline: none;
+  border-bottom: 1px solid rgb(42, 30, 63);
+}
+.txt-field label {
+  position: absolute;
+  top: 50%;
+  left: 5px;
+  color: #adadad;
+  transform: translateY(-50%);
+  font-size: 16px;
+  pointer-events: none;
+  transition: 0.5s;
+}
+.txt-field span::before {
+  content: "";
+  position: absolute;
+  top: 40px;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background: #2691d9;
+}
+.txt-field input:focus ~ label,
+.txt-field input:valid ~ label {
+  top: -3px;
+  color: white;
+}
+.txt-field input:focus ~ span::before,
+.txt-field input:valid ~ span::before {
+  width: 100%;
+}
+.signup_link {
+  text-align: center;
+  font-size: 14px;
+  color: #bdbaba;
+}
+.signup_link a:hover {
+  text-decoration: underline;
+}
+input[type="submit"] {
+  width: 80%;
+  height: 50px;
+  border: 1px solid rgb(115, 60, 209);
+  background: rgb(12, 146, 12);
+  font-size: 20px;
+  font-weight: 600;
+  border-radius: 20px;
+  transition: 0.5s;
+}
+input[type="submit"]:hover {
+  width: 90%;
+  transition: 0.5s;
+  cursor: pointer;
 }

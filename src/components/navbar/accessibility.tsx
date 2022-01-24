@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useMediaQuery } from "react-responsive";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { DeviceSize } from "../responsive/index";
 import { IAccessibility } from "../../types/types";
 const AccessibilityContainer = styled.div`
@@ -44,6 +44,7 @@ const LoginButton = styled.button`
   background-image: linear-gradient(to right, transparent 0%, #d042ff 100%);
   transition: all 240ms ease-in-out;
   cursor: pointer;
+  margin-left: 5px;
 
   &:hover {
     color: black;
@@ -63,17 +64,17 @@ export function Accessibility(props: IAccessibility) {
   };
   return (
     <AccessibilityContainer>
-      <RegisterButton>
-        <Link className="right-link-text" to="/register" onClick={clickHandler}>
-          Register
-        </Link>
-      </RegisterButton>
+      <NavLink
+        className="right-link-text"
+        to="/register"
+        onClick={clickHandler}
+      >
+        <RegisterButton>Register</RegisterButton>
+      </NavLink>
 
-      <LoginButton>
-        <Link className="right-link-text" to="/login" onClick={clickHandler}>
-          Login
-        </Link>
-      </LoginButton>
+      <NavLink className="right-link-text" to="/login" onClick={clickHandler}>
+        <LoginButton>Login</LoginButton>
+      </NavLink>
     </AccessibilityContainer>
   );
 }

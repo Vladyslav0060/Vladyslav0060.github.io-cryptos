@@ -70,6 +70,7 @@ const ContactMe: FC<Props> = (props: Props) => {
         wrapperCol={{ span: 16 }}
         initialValues={{ remember: true }}
         onFinish={onFinish}
+        requiredMark={false}
         autoComplete="off"
       >
         <Form.Item>

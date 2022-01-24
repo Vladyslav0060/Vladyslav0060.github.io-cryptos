@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useContext } from "react";
 import { AppContext } from "../../context/AppContext";
 import { actionTypes } from "../../reducers/AppReducer";
@@ -50,28 +50,38 @@ export function NavLinks() {
   return (
     <NavLinksContainer>
       <LinksWrapper>
-        <label>
-          <LinkItem>
-            <Link className="link-text" to="/">
-              Home
-            </Link>
-          </LinkItem>
-        </label>
-        <LinkItem>
-          <Link className="link-text" to="/exchange">
-            Exchange
-          </Link>
-        </LinkItem>
-        <LinkItem>
-          <Link className="link-text" to="/p1">
-            Coins
-          </Link>
-        </LinkItem>
-        <LinkItem>
-          <Link className="link-text" to="/p3">
-            Charts
-          </Link>
-        </LinkItem>
+        <NavLink
+          className="link-text"
+          to="/home"
+          activeClassName="link-text-active"
+        >
+          <LinkItem>Home</LinkItem>
+        </NavLink>
+
+        <NavLink
+          className="link-text"
+          to="/exchange"
+          activeClassName="link-text-active"
+        >
+          <LinkItem>Exchange</LinkItem>
+        </NavLink>
+
+        <NavLink
+          activeClassName="link-text-active"
+          className="link-text"
+          to="/p1"
+        >
+          <LinkItem>Coins</LinkItem>
+        </NavLink>
+
+        <NavLink
+          className="link-text"
+          to="/p3"
+          activeClassName="link-text-active"
+        >
+          <LinkItem>Charts</LinkItem>
+        </NavLink>
+
         <LinkItem
           onClick={() =>
             dispatch({

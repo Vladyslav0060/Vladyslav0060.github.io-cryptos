@@ -1,7 +1,7 @@
 import { FC } from "react";
 import styled from "styled-components";
 import GreenlandLogoImg from "../../assets/images/logo.png";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 const LogoWrapper = styled.div`
   display: flex;
   align-items: center;
@@ -27,14 +27,14 @@ const LogoText = styled.h2`
 
 const Logo: FC = () => {
   return (
-    <Link className="link-text" to="/">
+    <NavLink className="link-text" to="/home">
       <LogoWrapper>
         <LogoImg>
           <img src={GreenlandLogoImg} alt="Greenland logo" />
         </LogoImg>
         <LogoText>Cryptos</LogoText>
       </LogoWrapper>
-    </Link>
+    </NavLink>
   );
 };
 export default Logo;

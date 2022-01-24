@@ -3,11 +3,13 @@ import { createChart, ISeriesApi, CrosshairMode } from "lightweight-charts";
 import { actionTypes } from "../../reducers/AppReducer";
 import { AppContext } from "../../context/AppContext";
 import { Menu, Dropdown, Spin } from "antd";
+import { motion } from "framer-motion";
 import { DownOutlined, LoadingOutlined } from "@ant-design/icons";
 import styled from "styled-components";
 import axios from "axios";
 import Collapsible from "react-collapsible";
 import { transform } from "typescript";
+import FramerWrapper from "../wrapper/FramerWrapper";
 const cors = require("cors");
 // const periods = [m1, m5, m15, m30, h1, h2, h6, h12, d1];
 const configMenu = styled.div`
@@ -18,8 +20,38 @@ const configMenu = styled.div`
   color: "white",
   text-align: "left",
 `;
+const WrapperCharts = styled.div`
+  display: flex;
+  height: calc(100vh - 60px);
+  position: relative;
+  flex-direction: column;
+`;
+const ConfigMenu = styled.div`
+  height: 25px;
+  background-color: rgb(23, 26, 30);
+  color: white;
+  text-align: left;
+`;
+const SymbolMenu = styled.div`
+  position: relative;
+  height: 204px;
+  width: 420px;
+  overflow: auto;
+  will-change: transform;
+  direction: ltr;
+  background-color: rgb(23, 26, 30);
+  z-index: 100;
+  text-align: start;
+  border-radius: 5px;
+`;
+const ChartContainerRef = styled.div`
+  min-height: 500px;
+  width: 100%;
+  height: calc(100vh - 85px);
+  position: relative;
+`;
 const antLoadingIcon = (
-  <LoadingOutlined style={{ fontSize: "40", color: "green" }} spin />
+  <LoadingOutlined style={{ fontSize: "40", color: "white" }} spin />
 );
 const TestChart: FC = () => {
   const {
@@ -179,30 +211,9 @@ const TestChart: FC = () => {
     return () => resizeObserver.current.disconnect();
   }, []);
   return (
-    <div>
-      {/* <Spin spinning={isLoading} indicator={antLoadingIcon}> */}
-      <div
-        style={{
-          display: "flex",
-          height: "92.5vh",
-          position: "relative",
-          flexDirection: "column",
-        }}
-      >
-        {/* <Collapsible trigger={"Config menu ▼"}>
-        <div>hello</div>
-      </Collapsible> */}
-        <div
-          style={{
-            height: "25px",
-            backgroundColor: "#171a1e",
-            color: "white",
-            textAlign: "left",
-            // display: "flex",
-            // flexDirection: "row",
-            // columnGap: "15px",
-          }}
-        >
+    <FramerWrapper>
+      <WrapperCharts>
+        <ConfigMenu>
           <Dropdown overlay={periodsDropdownMenu} trigger={["click"]}>
             <a
               className="ant-dropdown-link"
@@ -217,11 +228,6 @@ const TestChart: FC = () => {
               <DownOutlined />
             </a>
           </Dropdown>
-          {/* <Dropdown overlay={symbolsDropdownMenu} trigger={["click"]}>
-          <a className="ant-dropdown-link" onClick={(e) => e.preventDefault()}>
-            Symbols <DownOutlined />
-          </a>
-        </Dropdown> */}
           <span onClick={() => setIsSymbolDropDown(!isSymbolDropDown)}>
             <a
               className="ant-dropdown-link"
@@ -232,30 +238,8 @@ const TestChart: FC = () => {
               <DownOutlined />
             </a>
           </span>
-          {/* <button
-          onClick={() => {
-            dispatch({
-              type: actionTypes.ADD_SYMBOLS,
-              payload: { id: "test", symbol: "testSymbol" },
-            });
-          }}
-        >
-          but
-        </button> */}
           {isSymbolDropDown ? (
-            <div
-              style={{
-                position: "relative",
-                height: "204px",
-                width: "420px",
-                overflow: "auto",
-                willChange: "transform",
-                direction: "ltr",
-                backgroundColor: "#171a1e",
-                zIndex: "100",
-                textAlign: "start",
-                borderRadius: "5px",
-              }}
+            <SymbolMenu
               onMouseEnter={() => setIsSymbolDropDown(true)}
               onMouseLeave={() => setIsSymbolDropDown(false)}
             >
@@ -264,25 +248,26 @@ const TestChart: FC = () => {
                   {el.id}
                 </div>
               ))}
-            </div>
+            </SymbolMenu>
           ) : (
             <></>
           )}
-        </div>
-        <Spin spinning={isLoading} indicator={antLoadingIcon}>
-          <div
-            ref={refContainer}
-            style={{
-              minHeight: "500px",
-              width: "100%",
-              height: "89.5vh",
-              position: "relative",
-            }}
-          />
-          {/* </Spin> */}
+        </ConfigMenu>
+        <Spin
+          size="large"
+          spinning={isLoading}
+          indicator={antLoadingIcon}
+          style={{
+            display: "flex",
+            height: "100vh",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <ChartContainerRef ref={refContainer} />
         </Spin>
-      </div>
-    </div>
+      </WrapperCharts>
+    </FramerWrapper>
   );
 };
 export default TestChart;

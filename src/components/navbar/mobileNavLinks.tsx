@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Accessibility } from "./accessibility";
 import MenuToggle from "./menuToggle";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 const NavLinksContainer = styled.div`
   height: 100%;
   display: flex;
@@ -36,7 +36,7 @@ const LinkItem = styled.li`
   margin-bottom: 10px;
 `;
 
-// const Link = styled.a`
+// const NavLink = styled.a`
 //   text-decoration: none;
 //   color: inherit;
 //   font-size: inherit;
@@ -57,29 +57,29 @@ export function MobileNavLinks() {
       {isOpen && (
         <LinksWrapper id="links-wrapper">
           <LinkItem>
-            <Link className="link-text" to="/" onClick={clickHandler}>
+            <NavLink className="link-text" to="/home" onClick={clickHandler}>
               Home
-            </Link>
+            </NavLink>
           </LinkItem>
           <LinkItem>
-            <Link className="link-text" to="/exchange">
+            <NavLink className="link-text" to="/exchange">
               Exchange
-            </Link>
+            </NavLink>
           </LinkItem>
           <LinkItem>
-            <Link className="link-text" to="/p1" onClick={clickHandler}>
+            <NavLink className="link-text" to="/p1" onClick={clickHandler}>
               Coins
-            </Link>
+            </NavLink>
           </LinkItem>
           <LinkItem>
-            <Link className="link-text" to="/p3" onClick={clickHandler}>
+            <NavLink className="link-text" to="/p3" onClick={clickHandler}>
               Charts
-            </Link>
+            </NavLink>
           </LinkItem>
           <LinkItem>
-            <Link className="link-text" to="/p2" onClick={clickHandler}>
+            <NavLink className="link-text" to="/p2" onClick={clickHandler}>
               Contact me
-            </Link>
+            </NavLink>
           </LinkItem>
           <Marginer />
           <Accessibility setOpen={setOpen} />
