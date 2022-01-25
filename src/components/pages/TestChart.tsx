@@ -85,7 +85,7 @@ const TestChart: FC = () => {
   const getSymbols = async () => {
     const res: any = await axios({
       method: "get",
-      url: "http://localhost:5000/coin/symbols",
+      url: "https://evening-island-58892.herokuapp.com/coin/symbols",
     });
 
     console.log(res.data);
@@ -160,7 +160,7 @@ const TestChart: FC = () => {
     console.log("FETCHDATA", symbol, period);
     const res: any = await axios({
       method: "get",
-      url: "http://localhost:5000/coin/ohlc",
+      url: "https://evening-island-58892.herokuapp.com/coin/ohlc",
       params: {
         interval: period,
         baseId: symbol,
@@ -253,6 +253,7 @@ const TestChart: FC = () => {
             <></>
           )}
         </ConfigMenu>
+
         <Spin
           size="large"
           spinning={isLoading}

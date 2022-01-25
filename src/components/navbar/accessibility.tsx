@@ -3,6 +3,10 @@ import { useMediaQuery } from "react-responsive";
 import { NavLink } from "react-router-dom";
 import { DeviceSize } from "../responsive/index";
 import { IAccessibility } from "../../types/types";
+import { useContext, useEffect } from "react";
+import { AppContext } from "../../context/AppContext";
+import { actionTypes } from "../../reducers/AppReducer";
+import Notification from "../Notification";
 const AccessibilityContainer = styled.div`
   display: flex;
   margin-left: 10px;
@@ -56,13 +60,29 @@ const LoginButton = styled.button`
   }
 `;
 
-export function Accessibility(props: IAccessibility) {
+const Accessibility: React.FC<any> = (props: IAccessibility) => {
+  const {
+    state: { isLoggedIn },
+    dispatch,
+  } = useContext(AppContext);
+  const logout = () => {
+    localStorage.removeItem("token");
+    dispatch({ type: actionTypes.SET_IS_LOGGED_IN, payload: false });
+    Notification({
+      message: "Log out",
+      description: "Log out succeed",
+      duration: 2,
+    });
+  };
   const setOpen = props.setOpen;
+  useEffect(() => {
+    console.log(localStorage.getItem("token"));
+  }, [localStorage.getItem("token")]);
   const isMobile = useMediaQuery({ maxWidth: DeviceSize.mobile });
   const clickHandler = () => {
     if (isMobile && setOpen) setOpen(false);
   };
-  return (
+  return !isLoggedIn ? (
     <AccessibilityContainer>
       <NavLink
         className="right-link-text"
@@ -76,5 +96,14 @@ export function Accessibility(props: IAccessibility) {
         <LoginButton>Login</LoginButton>
       </NavLink>
     </AccessibilityContainer>
+  ) : (
+    <AccessibilityContainer>
+      <span className="right-link-text" onClick={logout}>
+        <LoginButton>Logout</LoginButton>
+      </span>
+    </AccessibilityContainer>
+    // <div style={{ width: "300px" }}></div>
   );
-}
+};
+
+export default Accessibility;

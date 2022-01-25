@@ -16,14 +16,17 @@ export interface ISymbols {
 export type initStateType = {
   symbols: ISymbols[];
   isContactModalOpen: boolean;
+  isLoggedIn: boolean;
 };
 export enum actionTypes {
   ADD_SYMBOLS = "ADD_SYMBOLS",
   SET_IS_CONTACT_MODAL_OPEN = "SET_IS_CONTACT_MODAL_OPEN",
+  SET_IS_LOGGED_IN = "SET_IS_LOGGED_IN",
 }
 type AppPayload = {
   [actionTypes.ADD_SYMBOLS]: ISymbols;
   [actionTypes.SET_IS_CONTACT_MODAL_OPEN]: boolean;
+  [actionTypes.SET_IS_LOGGED_IN]: boolean;
 };
 export type AppActions = ActionMap<AppPayload>[keyof ActionMap<AppPayload>];
 export const AppReducer = (state: initStateType, action: AppActions) => {
@@ -33,5 +36,7 @@ export const AppReducer = (state: initStateType, action: AppActions) => {
       return { ...state, symbols: [...state.symbols, action.payload] };
     case actionTypes.SET_IS_CONTACT_MODAL_OPEN:
       return { ...state, isContactModalOpen: action.payload };
+    case actionTypes.SET_IS_LOGGED_IN:
+      return { ...state, isLoggedIn: action.payload };
   }
 };

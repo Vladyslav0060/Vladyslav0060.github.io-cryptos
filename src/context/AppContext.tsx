@@ -57,6 +57,7 @@ import {
 const initState = {
   symbols: [],
   isContactModalOpen: false,
+  isLoggedIn: false,
 };
 export const AppContext = createContext<{
   state: initStateType;

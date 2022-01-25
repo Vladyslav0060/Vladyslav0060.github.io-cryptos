@@ -32,7 +32,7 @@ const LinkItem = styled.li`
 
   &:hover {
     // border-top: 2px solid #2ecc71;
-    border-top: 2px solid #14bba7;
+    color: #14bba7;
   }
 `;
 

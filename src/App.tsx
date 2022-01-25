@@ -13,10 +13,18 @@ import Login from "./components/pages/Login";
 import Register from "./components/pages/Register";
 import NotFound from "./components/pages/NotFound";
 import FramerWrapper from "./components/wrapper/FramerWrapper";
+import { AppContext } from "./context/AppContext";
+import { useContext, useEffect } from "react";
+import { actionTypes } from "./reducers/AppReducer";
 const wrapComponent = ({ children }: any) => {
   return <FramerWrapper>{{ ...children }}</FramerWrapper>;
 };
 const App = () => {
+  const { dispatch } = useContext(AppContext);
+  useEffect(() => {
+    if (localStorage.getItem("token"))
+      dispatch({ type: actionTypes.SET_IS_LOGGED_IN, payload: true });
+  }, []);
   Modal.setAppElement("#root");
   return (
     <Router>

@@ -48,7 +48,9 @@ const Exchange: FC = () => {
 
   const request = async () => {
     console.log("request");
-    const result = await axios("http://localhost:5000/coin/assetsExchange");
+    const result = await axios(
+      "https://evening-island-58892.herokuapp.com/coin/assetsExchange"
+    );
     if (result.status === 200) setIsLoading(false);
     setResponse(result.data);
     if (isInitial) {
@@ -87,6 +89,14 @@ const Exchange: FC = () => {
     setSecondSymbol(buf);
     setTimeout(() => setIsRotating(false), 250);
   };
+  function template({ rotate, x }: any) {
+    return `rotate(${rotate}) translateX(${x})`;
+  }
+  const spring = {
+    type: "spring",
+    damping: 10,
+    stiffness: 100,
+  };
   return (
     <FramerWrapper>
       <div className="exchange-wrapper">
@@ -102,94 +112,105 @@ const Exchange: FC = () => {
             <Spin size="large" indicator={antLoadingIcon} />
           </div>
         ) : (
-          <div className="exchange-form">
-            {/* <Spin className="exchange-form" spinning={isLoading} indicator={antLoadingIcon}> */}
-            <div className="exchange-col">
-              <Modal
-                opened={modalsOpened.first}
-                setOpened={setModalsOpened}
-                nModal={1}
-                symbols={response}
-                currentSymbol={firstSymbol}
-                setCurrentSymbol={setFirstSymbol}
-              />
-              <button
-                onClick={() =>
-                  setModalsOpened((prevState) => ({
-                    ...prevState,
-                    first: !modalsOpened.first,
-                  }))
-                }
-              >
-                {firstSymbol?.id.toUpperCase() +
-                  "(" +
-                  firstSymbol?.symbol.toUpperCase() +
-                  ") ▼"}
-              </button>
-              {/* <Spin style={{ width: "15vw", height: "15vw", marginTop: "10px" }} /> */}
-              <img
-                src={firstSymbol?.image}
-                style={{ width: "15vw", height: "15vw" }}
-              />
-              {/* -------------------------------------------- */}
+          <motion.div
+            // exit={{ opacity: 0 }}
+            // animate={{ opacity: 2 }}
+            // initial={{ opacity: 0.5 }}
+            // transformTemplate={template}
+            // animate={{ rotate: 360 }}
+            // style={{ rotate: 0, x: "calc(10vh - 100px)" }}
+            transition={spring}
+            animate={{ scale: 0.95 }}
+          >
+            <div className="exchange-form">
+              {/* <Spin className="exchange-form" spinning={isLoading} indicator={antLoadingIcon}> */}
+              <div className="exchange-col">
+                <Modal
+                  opened={modalsOpened.first}
+                  setOpened={setModalsOpened}
+                  nModal={1}
+                  symbols={response}
+                  currentSymbol={firstSymbol}
+                  setCurrentSymbol={setFirstSymbol}
+                />
+                <button
+                  onClick={() =>
+                    setModalsOpened((prevState) => ({
+                      ...prevState,
+                      first: !modalsOpened.first,
+                    }))
+                  }
+                >
+                  {firstSymbol?.id.toUpperCase() +
+                    "(" +
+                    firstSymbol?.symbol.toUpperCase() +
+                    ") ▼"}
+                </button>
+                {/* <Spin style={{ width: "15vw", height: "15vw", marginTop: "10px" }} /> */}
+                <img
+                  src={firstSymbol?.image}
+                  style={{ width: "15vw", height: "15vw" }}
+                />
+                {/* -------------------------------------------- */}
+              </div>
+              <div className="exchange-col">
+                <input
+                  type="number"
+                  onChange={(e) => {
+                    if (parseFloat(e.target.value) >= 0)
+                      setAmount(e.target.value);
+                    else if (e.target.value === "") setAmount(0);
+                    return;
+                  }}
+                  value={amount}
+                  style={{ width: "50%", color: "white" }}
+                />
+                <FontAwesomeIcon
+                  className={isRotating ? "faSyncAlt-active" : "faSyncAlt"}
+                  icon={faSyncAlt}
+                  size="6x"
+                  color="black"
+                  onClick={switchCoins}
+                  style={{ width: "15vw", cursor: "pointer" }}
+                />
+                {/* <h1>{(amount * firstSymbol?.price) / secondSymbol?.price}</h1> */}
+                <input
+                  type="number"
+                  onChange={(e) => setAmount(e.target.value)}
+                  value={roundNumber()}
+                  style={{ width: "50%", color: "white" }}
+                />
+              </div>
+              <div className="exchange-col">
+                <Modal
+                  opened={modalsOpened.second}
+                  setOpened={setModalsOpened}
+                  nModal={2}
+                  symbols={response}
+                  currentSymbol={secondSymbol}
+                  setCurrentSymbol={setSecondSymbol}
+                />
+                <button
+                  onClick={() =>
+                    setModalsOpened((prevState) => ({
+                      ...prevState,
+                      second: !modalsOpened.second,
+                    }))
+                  }
+                >
+                  {secondSymbol?.id.toUpperCase() +
+                    "(" +
+                    secondSymbol?.symbol.toUpperCase() +
+                    ") ▼"}
+                </button>
+                <img
+                  src={secondSymbol?.image}
+                  style={{ width: "15vw", height: "15vw" }}
+                />
+              </div>
+              {/* </Spin> */}
             </div>
-            <div className="exchange-col">
-              <input
-                type="number"
-                onChange={(e) => {
-                  if (parseFloat(e.target.value) >= 0)
-                    setAmount(e.target.value);
-                  else if (e.target.value === "") setAmount(0);
-                  return;
-                }}
-                value={amount}
-                style={{ width: "50%", color: "white" }}
-              />
-              <FontAwesomeIcon
-                className={isRotating ? "faSyncAlt-active" : "faSyncAlt"}
-                icon={faSyncAlt}
-                size="6x"
-                color="black"
-                onClick={switchCoins}
-                style={{ width: "15vw", cursor: "pointer" }}
-              />
-              {/* <h1>{(amount * firstSymbol?.price) / secondSymbol?.price}</h1> */}
-              <input
-                type="number"
-                onChange={(e) => setAmount(e.target.value)}
-                value={roundNumber()}
-                style={{ width: "50%", color: "white" }}
-              />
-            </div>
-            <div className="exchange-col">
-              <Modal
-                opened={modalsOpened.second}
-                setOpened={setModalsOpened}
-                nModal={2}
-                symbols={response}
-                currentSymbol={secondSymbol}
-                setCurrentSymbol={setSecondSymbol}
-              />
-              <button
-                onClick={() =>
-                  setModalsOpened((prevState) => ({
-                    ...prevState,
-                    second: !modalsOpened.second,
-                  }))
-                }
-              >
-                {secondSymbol?.id.toUpperCase() +
-                  "(" +
-                  secondSymbol?.symbol.toUpperCase() +
-                  ") ▼"}
-              </button>
-              <img
-                src={secondSymbol?.image}
-                style={{ width: "15vw", height: "15vw" }}
-              />
-            </div>
-            {/* </Spin> */}
-          </div>
+          </motion.div>
         )}
       </div>
     </FramerWrapper>

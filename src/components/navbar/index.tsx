@@ -1,7 +1,8 @@
 import { useMediaQuery } from "react-responsive";
 import styled from "styled-components";
 import Logo from "../logo/logo";
-import { Accessibility } from "./accessibility";
+// import { Accessibility } from "./accessibility";
+import Accessibility from "./accessibility";
 import { NavLinks } from "./navLinks";
 import { DeviceSize } from "../responsive";
 import MobileNavLinks from "./mobileNavLinks";

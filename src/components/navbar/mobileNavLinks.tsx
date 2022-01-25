@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { Accessibility } from "./accessibility";
+// import { Accessibility } from "./accessibility";
+import Accessibility from "./accessibility";
 import MenuToggle from "./menuToggle";
 import { NavLink } from "react-router-dom";
 const NavLinksContainer = styled.div`

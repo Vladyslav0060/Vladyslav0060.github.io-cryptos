@@ -70,3 +70,34 @@ input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
+
+.css-gradient2 {
+  background: linear-gradient(342deg, #28dfb0, #d7ff00, #ff0000);
+  background-size: 600% 600%;
+
+  -moz-animation: AnimationName 10s ease infinite;
+  animation: AnimationName 10s ease infinite;
+}
+
+@-moz-keyframes AnimationName {
+  0% {
+    background-position: 55% 0%;
+  }
+  50% {
+    background-position: 46% 100%;
+  }
+  100% {
+    background-position: 55% 0%;
+  }
+}
+@keyframes AnimationName {
+  0% {
+    background-position: 55% 0%;
+  }
+  50% {
+    background-position: 46% 100%;
+  }
+  100% {
+    background-position: 55% 0%;
+  }
+}

@@ -8,6 +8,7 @@ import styled from "styled-components";
 import Coin from "../Coin";
 import Footer from "../footer/Footer";
 import FramerWrapper from "../wrapper/FramerWrapper";
+import * as dotenv from "dotenv";
 let firstName = "bitcoin",
   secondName = "ethereum";
 let firstPrice = 0,
@@ -19,6 +20,7 @@ const TextField = styled.input`
   border-radius: 3px;
   background: white;
   border: none;
+  padding: 0;
 `;
 const columns: any = [
   {
@@ -115,7 +117,10 @@ const CoinList: FC = () => {
   const request = async (url: string | undefined) => {
     if (url != undefined) {
       // const response = await axios.get(url);
-      const response = await axios.get("http://localhost:5000/coin/assets");
+      // const response = await axios.get("http://localhost:5000/coin/assets");
+      const response = await axios.get(
+        "https://evening-island-58892.herokuapp.com/coin/assets"
+      );
       console.log(response.data);
       // console.log(response.data);
       // response.data.map((item: ICoinRequest) => {
@@ -144,7 +149,7 @@ const CoinList: FC = () => {
                   marginRight: "15%",
                   padding: "10px",
                   height: "100%",
-                  // backgroundColor: "black",
+                  // backgroundColor: "transparent",
                 }
           }
         >
@@ -157,6 +162,7 @@ const CoinList: FC = () => {
             )}
             loading={fetchedData.length ? false : true}
             columns={columns}
+            sortDirections={["descend"]}
             dataSource={
               searchField === ""
                 ? fetchedData
