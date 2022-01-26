@@ -23,6 +23,9 @@ const LogoText = styled.h2`
   margin-left: 4px;
   color: white;
   font-weight: 500;
+  @media (max-width: 768px) {
+    margin-top: 3px;
+  }
 `;
 
 const Logo: FC = () => {

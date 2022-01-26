@@ -8,9 +8,11 @@
 }
 .link-text {
   text-decoration: none;
-  color: inherit;
+  color: white;
   font-size: inherit;
+  padding: 5px;
   cursor: pointer;
+  /* font-size: 20px; */
 }
 .link-text-active {
   border-top: 2px solid #14bba7;
@@ -362,4 +364,27 @@ input[type="submit"]:hover {
 .txt-field input[type="password"] {
   text-align: left;
   padding-left: 10px;
+}
+
+@media screen and (max-width: 768px) {
+  .link-text {
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 0 33% 3px 10px;
+  }
+  .link-text svg {
+    margin-right: 10px;
+  }
+  .ant-table-title {
+    border-radius: 0;
+    border-radius: 0 !important;
+  }
+  .ant-table-thead > tr > th,
+  .ant-table-tbody > tr > td,
+  .ant-table tfoot > tr > th,
+  .ant-table tfoot > tr > td {
+    padding: 16px 10px !important;
+  }
 }

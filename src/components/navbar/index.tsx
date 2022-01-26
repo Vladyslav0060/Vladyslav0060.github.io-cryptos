@@ -14,6 +14,9 @@ const NavbarContainer = styled.div`
   display: flex;
   align-items: center;
   padding: 0 1.5em;
+  @media (max-width: 768px) {
+    padding: 0 1.5em 0 0;
+  }
 `;
 const LeftSection = styled.div`
   display: flex;

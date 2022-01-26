@@ -5,6 +5,11 @@ import styled from "styled-components";
 const Button = styled.div`
   z-index: 99;
   cursor: pointer;
+  filter: invert(71%) sepia(98%) saturate(1284%) hue-rotate(164deg)
+    brightness(100%) contrast(103%);
+  @media (max-width: 768px) {
+    margin-top: 10px;
+  }
 `;
 
 const Path = (props: any) => (
