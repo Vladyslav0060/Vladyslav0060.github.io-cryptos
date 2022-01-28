@@ -1,5 +1,5 @@
 import { FC } from "react";
-import ICoin, { ICoinRequest } from "../components/pages/CoinList";
+import ICoin, { ICoinRequest } from "./pages/CoinList";
 import styled from "styled-components";
 const CoinContainer = styled.div`
   display: flex;
