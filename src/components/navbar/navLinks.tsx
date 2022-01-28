@@ -31,8 +31,8 @@ const LinkItem = styled.li`
   transition: all 220ms ease-in-out;
 
   &:hover {
-    // border-top: 2px solid #2ecc71;
-    color: #14bba7;
+    // color: #14bba7;
+    color: #9d67f1;
   }
 `;
 
@@ -69,14 +69,14 @@ export function NavLinks() {
         <NavLink
           activeClassName="link-text-active"
           className="link-text"
-          to="/p1"
+          to="/coins"
         >
           <LinkItem>Coins</LinkItem>
         </NavLink>
 
         <NavLink
           className="link-text"
-          to="/p3"
+          to="/charts"
           activeClassName="link-text-active"
         >
           <LinkItem>Charts</LinkItem>
@@ -90,7 +90,7 @@ export function NavLinks() {
             })
           }
         >
-          <span className="link-text">Contact me</span>
+          <span className="link-text">Contact</span>
         </LinkItem>
       </LinksWrapper>
     </NavLinksContainer>

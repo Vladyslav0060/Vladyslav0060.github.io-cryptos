@@ -2,6 +2,7 @@ import { FC, useContext, useEffect } from "react";
 import { AppContext } from "../../context/AppContext";
 import { motion } from "framer-motion";
 import FramerWrapper from "../wrapper/FramerWrapper";
+import ExampleChart from "./ExampleChart";
 const HomePage: FC = () => {
   const {
     state: { isContactModalOpen },
@@ -15,17 +16,21 @@ const HomePage: FC = () => {
     <FramerWrapper>
       <div className="home-wrapper">
         <div className="content">
-          <h2>Hello, I'm React developer</h2>
-          <p>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fuga magni
-            debitis, autem ab quos iste minima tenetur labore. Consequuntur vero
-            modi in placeat optio non deserunt nisi error sunt necessitatibus
-            eveniet ad reiciendis maxime, mollitia officia assumenda, odio
-            delectus possimus accusamus voluptatibus? Libero sequi quis
-            architecto, reiciendis nemo voluptates officiis cum voluptate quam
-            tempore nisi!
-          </p>
+          <h2>Cryptocurrency dashboard</h2>
+          <div className="homepage-card">
+            <p>
+              This application is useful for those, who is interested in crypto.
+              It provides very efficient data and visualises it.
+            </p>
+          </div>
+          <div className="homepage-card">
+            <p>
+              It has been developed using React on frontend and Express.js on
+              backend, database for storing users data - mongoDB
+            </p>
+          </div>
         </div>
+        {/* <ExampleChart /> */}
         <svg
           className="wave"
           xmlns="http://www.w3.org/2000/svg"

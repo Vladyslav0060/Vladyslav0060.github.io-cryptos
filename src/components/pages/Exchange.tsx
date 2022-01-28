@@ -6,11 +6,14 @@ import Modal from "../exchange-components/Modal";
 import { faSyncAlt } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { LoadingOutlined } from "@ant-design/icons";
+import { useMediaQuery } from "react-responsive";
+import { DeviceSize } from "../responsive";
 import { motion } from "framer-motion";
 import FramerWrapper from "../wrapper/FramerWrapper";
 // let [symbols, setSymbols]: any = [];
 const antLoadingIcon = <LoadingOutlined style={{ color: "white" }} spin />;
 const Exchange: FC = () => {
+  const isMobile = useMediaQuery({ maxWidth: DeviceSize.mobile });
   let isInitial = true;
   let [symbolDropdownMenu, setSymbolDropdownMenu]: any = useState();
   const [modalsOpened, setModalsOpened] = useState({
@@ -107,6 +110,7 @@ const Exchange: FC = () => {
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
+              height: "95vh",
             }}
           >
             <Spin size="large" indicator={antLoadingIcon} />
@@ -201,7 +205,7 @@ const Exchange: FC = () => {
                   {secondSymbol?.id.toUpperCase() +
                     "(" +
                     secondSymbol?.symbol.toUpperCase() +
-                    ") ▼"}
+                    `) ${isMobile ? "▲" : "▼"}`}
                 </button>
                 <img
                   src={secondSymbol?.image}

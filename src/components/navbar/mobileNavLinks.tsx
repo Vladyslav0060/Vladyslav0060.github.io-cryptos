@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 // import { Accessibility } from "./accessibility";
 import Accessibility from "./accessibility";
@@ -14,6 +14,8 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useMediaQuery } from "react-responsive";
 import { DeviceSize } from "../responsive";
+import { AppContext } from "../../context/AppContext";
+import { actionTypes } from "../../reducers/AppReducer";
 const NavLinksContainer = styled.div`
   height: 100%;
   display: flex;
@@ -21,19 +23,29 @@ const NavLinksContainer = styled.div`
 `;
 
 const LinksWrapper = styled.div`
+  // display: flex;
+  // height: 100%;
+  // list-style: none;
+  // background-color: #000;
+  // width: 100%;
+  // flex-direction: column;
+  // position: fixed;
+  // top: 60px;
+  // left: 0;
+  // z-index: 100;
+  // align-items: inherit;
+  // justify-content: flex-start;
+  // padding-top: 20px;
   display: flex;
-  height: 100%;
-  list-style: none;
-  background-color: #000;
-  width: 100%;
-  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
   position: fixed;
+  background-color: #000;
+  height: 100vh;
+  width: 100vw;
   top: 60px;
-  left: 0;
-  z-index: 100;
-  align-items: inherit;
-  justify-content: flex-start;
-  padding-top: 20px;
+  left: 0px;
+  z-index: 200;
 `;
 
 const LinkItem = styled.div`
@@ -55,6 +67,10 @@ const LinkItem = styled.div`
 // `;
 
 export function MobileNavLinks() {
+  const {
+    state: { isContactModalOpen },
+    dispatch,
+  } = useContext(AppContext);
   const [isOpen, setOpen] = useState(false);
   const isMobile = useMediaQuery({ maxWidth: DeviceSize.mobile });
   const clickHandler = () => {
@@ -73,9 +89,11 @@ export function MobileNavLinks() {
           <div
             style={{
               display: "flex",
-              flexWrap: "wrap",
               width: "100%",
-              margin: "0 0 15px 60vw",
+              flexDirection: "column",
+              alignItems: "center",
+              paddingLeft: "10px",
+              // margin: "0 0 15px 60vw",
             }}
           >
             <NavLink className="link-text" to="/home" onClick={clickHandler}>
@@ -83,12 +101,17 @@ export function MobileNavLinks() {
                 icon={faHome}
                 size="2x"
                 color="white"
+                style={{ width: "40px" }}
                 // style={{ width: "15vw", cursor: "pointer" }}
               />
               Home
             </NavLink>
 
-            <NavLink className="link-text" to="/exchange">
+            <NavLink
+              className="link-text"
+              to="/exchange"
+              onClick={clickHandler}
+            >
               <FontAwesomeIcon
                 icon={faExchangeAlt}
                 size="2x"
@@ -98,7 +121,7 @@ export function MobileNavLinks() {
               Exchange
             </NavLink>
 
-            <NavLink className="link-text" to="/p1" onClick={clickHandler}>
+            <NavLink className="link-text" to="/coins" onClick={clickHandler}>
               <FontAwesomeIcon
                 icon={faListAlt}
                 size="2x"
@@ -108,7 +131,7 @@ export function MobileNavLinks() {
               Coins
             </NavLink>
 
-            <NavLink className="link-text" to="/p3" onClick={clickHandler}>
+            <NavLink className="link-text" to="/charts" onClick={clickHandler}>
               <FontAwesomeIcon
                 icon={faChartBar}
                 size="2x"
@@ -117,17 +140,36 @@ export function MobileNavLinks() {
               />
               Charts
             </NavLink>
-            <NavLink className="link-text" to="/p2" onClick={clickHandler}>
+            <section
+              // style={{
+              //   fontSize: "20px",
+              //   display: "flex",
+              //   alignItems: "center",
+              //   width: "100%",
+              //   marginLeft: "33vw",
+              //   padding: "0 33% 3px 10px",
+              // }}
+              className="link-text"
+              onClick={() => {
+                clickHandler();
+                dispatch({
+                  type: actionTypes.SET_IS_CONTACT_MODAL_OPEN,
+                  payload: !isContactModalOpen,
+                });
+              }}
+            >
               <FontAwesomeIcon
                 icon={faComment}
                 size="2x"
                 color="white"
                 // style={{ width: "10vw", cursor: "pointer" }}
               />
-              Contact
-            </NavLink>
+              <span>Contact</span>
+            </section>
+            <div>
+              <Accessibility setOpen={setOpen} />
+            </div>
           </div>
-          <Accessibility setOpen={setOpen} />
         </LinksWrapper>
       )}
     </NavLinksContainer>

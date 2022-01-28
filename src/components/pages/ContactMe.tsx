@@ -70,8 +70,8 @@ const ContactMe: FC<Props> = (props: Props) => {
       bottom: "auto",
       marginRight: "-50%",
       transform: "translate(-50%, -50%)",
-      backgroundColor: "#000000a1",
-      width: isMobile ? "300px" : "600px",
+      backgroundColor: "#000000cf",
+      width: isMobile ? "90%" : "600px",
       border: 0,
     },
     overlay: { zIndex: 1000, backgroundColor: "#4c4c4cbf" },
@@ -93,9 +93,11 @@ const ContactMe: FC<Props> = (props: Props) => {
           requiredMark={false}
           autoComplete="off"
         >
-          <Form.Item>
-            <h2 className="form-item">Contact form</h2>
-          </Form.Item>
+          {/* <Form.Item> */}
+          <h2 className="form-item" style={{ textAlign: "center" }}>
+            Contact form
+          </h2>
+          {/* </Form.Item> */}
           <Form.Item
             label={<label style={{ color: "white" }}>Username</label>}
             name="name"
@@ -127,7 +129,10 @@ const ContactMe: FC<Props> = (props: Props) => {
               margin: "0",
             }}
           >
-            <Button type="primary" htmlType="submit">
+            <Button
+              style={{ background: "#9d67f1", color: "white", border: "none" }}
+              htmlType="submit"
+            >
               Send
             </Button>
           </Form.Item>

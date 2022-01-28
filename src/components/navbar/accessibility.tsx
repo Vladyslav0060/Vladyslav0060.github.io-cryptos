@@ -9,7 +9,12 @@ import { actionTypes } from "../../reducers/AppReducer";
 import Notification from "../Notification";
 const AccessibilityContainer = styled.div`
   display: flex;
-  margin-left: 10px;
+  justify-content: center;
+  @media (max-width: 768px) {
+    width: 100vw;
+    margin-top: 15px;
+    gap: 10px;
+  }
 `;
 
 const RegisterButton = styled.button`
@@ -19,7 +24,9 @@ const RegisterButton = styled.button`
   color: #fff;
   font-size: 13px;
   font-weight: 600;
+  width: 85px;
   border-radius: 20px;
+  // border-radius: 13px;
   background-color: #3a3497;
   background-image: linear-gradient(to left, transparent 0%, #38bb9dc4 100%);
   transition: all 240ms ease-in-out;
@@ -43,7 +50,9 @@ const LoginButton = styled.button`
   color: #fff;
   font-size: 13px;
   font-weight: 600;
+  width: 85px;
   border-radius: 20px;
+  // border-radius: 13px;
   background-color: #3a3497;
   background-image: linear-gradient(to right, transparent 0%, #d042ff 100%);
   transition: all 240ms ease-in-out;
