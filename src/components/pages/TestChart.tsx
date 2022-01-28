@@ -1,25 +1,10 @@
-import { FC, useEffect, useRef, useState, useContext, Dispatch } from "react";
-import { createChart, ISeriesApi, CrosshairMode } from "lightweight-charts";
-import { actionTypes } from "../../reducers/AppReducer";
-import { AppContext } from "../../context/AppContext";
+import { FC, useEffect, useRef, useState } from "react";
+import { createChart } from "lightweight-charts";
 import { Menu, Dropdown, Spin } from "antd";
-import { motion } from "framer-motion";
 import { DownOutlined, LoadingOutlined } from "@ant-design/icons";
 import styled from "styled-components";
 import axios from "axios";
-import Collapsible from "react-collapsible";
-import { transform } from "typescript";
 import FramerWrapper from "../wrapper/FramerWrapper";
-const cors = require("cors");
-// const periods = [m1, m5, m15, m30, h1, h2, h6, h12, d1];
-const configMenu = styled.div`
-  display: flex;
-  flex-direction: row;
-  height: "30px",
-  background-color: "black",
-  color: "white",
-  text-align: "left",
-`;
 const WrapperCharts = styled.div`
   display: flex;
   height: calc(100vh - 60px);
@@ -51,16 +36,9 @@ const ChartContainerRef = styled.div`
   position: relative;
 `;
 const antLoadingIcon = (
-  <LoadingOutlined style={{ fontSize: "40", color: "white" }} spin />
+  <LoadingOutlined style={{ fontSize: "80", color: "white" }} spin />
 );
 const TestChart: FC = () => {
-  const {
-    state: { symbols },
-    dispatch,
-  } = useContext(AppContext);
-  // useEffect(() => {
-  //   console.log(symbols);
-  // }, [symbols]);
   const chart: any = useRef();
   const refContainer: any = useRef();
   const resizeObserver: any = useRef();
@@ -73,11 +51,9 @@ const TestChart: FC = () => {
   const [isLoading, setIsLoading] = useState(true);
   const onPeriodsClick = (e: any) => {
     setPeriod(e.key);
-    // fetchData();
   };
   const onSymbolClick = (symbol: any) => {
     setSymbol(symbol.target.innerHTML);
-    // fetchData();
   };
   useEffect(() => {
     console.log(symbol);
@@ -97,10 +73,7 @@ const TestChart: FC = () => {
     chart.current = createChart(refContainer.current, {
       width: refContainer.current.clientWidth,
       height: refContainer.current.clientHeight,
-      // width: refContainer.current.innerWidth,
-      // height: refContainer.current.innerHeight,
       layout: {
-        // backgroundColor: "#253248",
         backgroundColor: "#171a1e",
         textColor: "rgba(255, 255, 255, 0.9)",
       },
@@ -127,18 +100,7 @@ const TestChart: FC = () => {
     });
     chart.current.priceScale().applyOptions({ autoScale: true });
   }, []);
-  const symbolsDropdownMenu = (
-    // <Menu>
-    //   {symbols.map((s) => (
-    //     <Menu.Item key={s.id}>{s.symbol}</Menu.Item>
-    //   ))}
-    // </Menu>
-    <Menu>
-      {symbolsList.map((s: any) => (
-        <Menu.Item key={s.id}>{s.symbol}</Menu.Item>
-      ))}
-    </Menu>
-  );
+
   const periodsDropdownMenu = (
     <Menu onClick={onPeriodsClick}>
       <Menu.Item key="m1">1 min</Menu.Item>
@@ -238,7 +200,7 @@ const TestChart: FC = () => {
               <DownOutlined />
             </a>
           </span>
-          {isSymbolDropDown ? (
+          {isSymbolDropDown && !isLoading ? (
             <SymbolMenu
               onMouseEnter={() => setIsSymbolDropDown(true)}
               onMouseLeave={() => setIsSymbolDropDown(false)}
@@ -254,19 +216,23 @@ const TestChart: FC = () => {
           )}
         </ConfigMenu>
 
-        <Spin
-          size="large"
-          spinning={isLoading}
-          indicator={antLoadingIcon}
-          style={{
-            display: "flex",
-            height: "100vh",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <ChartContainerRef ref={refContainer} />
-        </Spin>
+        <ChartContainerRef ref={refContainer}>
+          {isLoading ? (
+            <Spin
+              indicator={antLoadingIcon}
+              size="large"
+              style={{
+                display: "flex",
+                height: "100%",
+                justifyContent: "center",
+                alignItems: "center",
+                background: "#000",
+              }}
+            />
+          ) : (
+            <></>
+          )}
+        </ChartContainerRef>
       </WrapperCharts>
     </FramerWrapper>
   );

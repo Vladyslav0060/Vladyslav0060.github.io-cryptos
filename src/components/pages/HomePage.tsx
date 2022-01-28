@@ -2,7 +2,6 @@ import { FC, useContext, useEffect } from "react";
 import { AppContext } from "../../context/AppContext";
 import { motion } from "framer-motion";
 import FramerWrapper from "../wrapper/FramerWrapper";
-import ExampleChart from "./ExampleChart";
 const HomePage: FC = () => {
   const {
     state: { isContactModalOpen },

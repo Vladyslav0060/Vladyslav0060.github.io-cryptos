@@ -84,15 +84,18 @@
 .home-wrapper .content .homepage-card {
   font-size: 2rem;
   text-align: justify;
-  flex: 50%;
-  padding: 15px;
-  margin: 5px;
+  flex: 50% 1;
+  padding: 25px;
+  margin: 0 5px;
   background: rgba(255, 255, 255, 0.25);
   box-shadow: 0 8px 32px 0 rgb(31 38 135 / 37%);
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
   border-radius: 10px;
   border: 1px solid rgba(255, 255, 255, 0.18);
+}
+.homepage-card p {
+  margin-bottom: 0;
 }
 .example-chart .example-chart-container {
   z-index: 0;
@@ -136,7 +139,9 @@
   border-top-right-radius: 20px !important;
   border-top-left-radius: 20px !important;
 }
-
+.ant-spin-container::after {
+  background: #000 !important;
+}
 .ant-table-thead > tr > th {
   /* background: rgba(30, 2, 56, 0.87) !important; */
   color: white !important;
