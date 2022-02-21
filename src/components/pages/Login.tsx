@@ -1,6 +1,5 @@
 import { FC, useContext, useState } from "react";
-import { Form, Input, Button, Checkbox } from "antd";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import FramerWrapper from "../wrapper/FramerWrapper";
 import axios, { AxiosError } from "axios";
 import { AppContext } from "../../context/AppContext";
@@ -53,12 +52,11 @@ const Login: FC = () => {
   return (
     <FramerWrapper>
       <div className="page-wrapper">
-        <div className="center">
+        <div className="login-form">
           <h1>Login</h1>
           <form onSubmit={onSubmit}>
             <div className="txt-field">
               <input type="text" name="username" onChange={onChange} required />
-              {/* <span></span> */}
               <label>Username</label>
             </div>
             <div className="txt-field">
@@ -68,7 +66,6 @@ const Login: FC = () => {
                 onChange={onChange}
                 required
               />
-              {/* <span></span> */}
               <label>Password</label>
             </div>
             <input type="submit" value="Login" />

@@ -1,0 +1,115 @@
+@import 'mixins'
+.exchange-wrapper
+    height: calc(100vh - 60px)
+    display: flex
+    justify-content: center
+    align-items: center
+    flex-direction: row
+    background-image: url("https://4kwallpapers.com/images/walls/thumbs_3t/1432.jpg")
+    
+    background-size: cover
+    background-repeat: no-repeat
+.exchange-form 
+    display: flex
+    width: 80vw
+    height: 85vh
+    border-radius: 10px
+    background: #0a0a0a57
+    box-shadow: 0 3px 20px 0 #04050575
+    // -webkit-backdrop-filter: blur(5.5px)
+    // backdrop-filter: blur(2.5px)
+    border-radius: 10px
+    border: 1px solid #8282a12e
+    &.spinner
+        display: flex
+        justify-content: center
+        align-items: center
+        height: 85vh
+    @include media("max", "md" )
+        flex-direction: column
+        align-items: center
+        width: 85vw
+        &:first-child div
+            justify-content: flex-end
+        &:last-child div
+            justify-content: flex-start
+        .exchange-col
+            &:first-child
+                padding-top: 20px
+            &:last-child button
+                 order: 3
+            button
+                width: 80vw !important
+            input
+                width: 60vw !important
+            img
+                width: 30vw !important
+                height: 30vw !important
+.exchange-col
+    display: flex
+    flex-direction: column
+    gap: 20px
+    align-items: center
+    width: 33%
+    height: 100%
+    justify-content: center
+    input
+        width: 50%
+        color: white
+    backdrop
+    button,input 
+        background: rgba(0, 0, 0, 0.63)
+        color: white
+        padding: 7px 13px
+        outline: none
+        border: none
+        border-radius: 5px
+        box-shadow: 2px 3px 20px 3px #00000033   
+    img
+        width: 15vw
+        height: 15vw
+    svg 
+        font-size: 6em
+        cursor: pointer
+.modal-exchange 
+    color: white
+    height: 500px
+    min-width: 550px
+    overflow-x: hidden
+    box-sizing: border-box
+    width: 100%
+    display: grid
+    grid-row-gap: 10px
+    justify-content: center
+    grid-auto-flow: row
+    grid-template-columns: repeat(3, 1fr)
+    grid-template-rows: repeat(2, 1fr)
+    @include media("max", "md" )
+        min-width: inherit
+        grid-template-columns: repeat(2, 1fr)
+        .modal-exchange-child
+            text-align: center
+    
+.modal-title 
+    color: white
+    text-align: center
+
+.modal-title span 
+    color: rgb(95, 231, 5)
+
+.modal-exchange-child 
+    text-align: justify
+
+.modal-exchange-child:hover 
+    cursor: pointer
+    color: rgb(95, 231, 5)
+
+
+@keyframes spin 
+  100% 
+    transform: rotate(180deg)
+.faSyncAlt-active 
+    -webkit-animation: spin 0.25s linear infinite
+    animation: spin 0.25s linear infinite
+    -moz-animation: spin 0.25s linear infinite
+

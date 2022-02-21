@@ -1,5 +1,4 @@
 import { FC } from "react";
-import ICoin, { ICoinRequest } from "./pages/CoinList";
 import styled from "styled-components";
 const CoinContainer = styled.div`
   display: flex;
@@ -51,7 +50,6 @@ const Coin: FC<any> = ({ item }: any) => {
       <CoinContainer>
         <CoinRow>
           <CoinMainInfo>
-            {/* <img src={item.image} alt="crypto" /> */}
             <CoinImage src={item.image} alt="crypto" />
             <CoinH1>{item.name}</CoinH1>
             <CoinSymbol>{item.symbol}</CoinSymbol>

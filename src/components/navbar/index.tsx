@@ -1,47 +1,22 @@
 import { useMediaQuery } from "react-responsive";
-import styled from "styled-components";
 import Logo from "../logo/logo";
-// import { Accessibility } from "./accessibility";
 import Accessibility from "./accessibility";
 import { NavLinks } from "./navLinks";
 import { DeviceSize } from "../responsive";
 import MobileNavLinks from "./mobileNavLinks";
-const NavbarContainer = styled.div`
-  width: 100%;
-  background-color: black;
-  height: 60px;
-  box-shadow: 0 1px 3px rgba(15, 15, 15, 0.13);
-  display: flex;
-  align-items: center;
-  padding: 0 1.5em;
-  @media (max-width: 768px) {
-    padding: 0 1.5em 0 0;
-  }
-`;
-const LeftSection = styled.div`
-  display: flex;
-`;
-const MiddleSection = styled.div`
-  display: flex;
-  flex: 2;
-  height: 100%;
-  justify-content: center;
-`;
-const RightSection = styled.div`
-  display: flex;
-`;
+
 export function Navbar() {
   const isMobile = useMediaQuery({ maxWidth: DeviceSize.mobile });
   return (
-    <NavbarContainer>
-      <LeftSection>
+    <div className="navbar-container">
+      <div className="logo">
         <Logo />
-      </LeftSection>
-      <MiddleSection>{!isMobile && <NavLinks />}</MiddleSection>
-      <RightSection>
+      </div>
+      <div className="nav-links">{!isMobile && <NavLinks />}</div>
+      <div className="login-section">
         {!isMobile && <Accessibility />}
         {isMobile && <MobileNavLinks />}
-      </RightSection>
-    </NavbarContainer>
+      </div>
+    </div>
   );
 }

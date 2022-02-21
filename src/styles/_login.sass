@@ -1,0 +1,78 @@
+.login-form 
+    position: absolute
+    top: 50%
+    left: 50%
+    transform: translate(-50%, -50%)
+    width: 400px
+    background: #1108227d
+    border-radius: 10px
+    text-align: center
+    h1 
+        text-align: center
+        padding: 10px 0 10px 0
+        border-bottom: 1px solid rgb(42, 30, 63)
+        color: white
+    form 
+        padding: 0 40px 5px
+        box-sizing: border-box
+    .txt-field 
+        position: relative
+        margin: 15px 0
+        input
+            width: 100%
+            padding: 0 5px
+            height: 40px
+            font-size: 16px
+            border: none
+            background: #00000032
+            border-radius: 5px
+            outline: none
+            text-align: left
+            margin: 10px 0;
+        label
+            position: absolute
+            top: 50%
+            left: 5px
+            color: #adadad
+            transform: translateY(-50%)
+            font-size: 16px
+            pointer-events: none
+            transition: 0.5s
+        span::before 
+            content: ""
+            position: absolute
+            top: 40px
+            left: 0
+            width: 0%
+            height: 2px
+            background: #2691d9
+        input:focus ~ label,input:valid ~ label 
+            top: -3px
+            color: white
+        input:focus ~ span::before,
+        input:valid ~ span::before 
+            width: 100%
+    .signup_link
+        padding: 5px
+        text-align: center
+        font-size: 14px
+        color: #bdbaba
+        a:hover 
+            text-decoration: underline
+    input[type="submit"]
+        width: 80%
+        height: 50px
+        box-shadow: 0px 0px 10px 9px rgba(31, 47, 92, 0.267)
+        border: none
+        background: #9d67f1
+        font-size: 20px
+        font-weight: 600
+        border-radius: 20px
+        transition: 0.6s
+        &:hover,&:focus
+            cursor: pointer
+            transition: 0.8s
+            width: 100%
+            
+
+

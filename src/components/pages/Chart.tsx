@@ -38,7 +38,7 @@ const ChartContainerRef = styled.div`
 const antLoadingIcon = (
   <LoadingOutlined style={{ fontSize: "80", color: "white" }} spin />
 );
-const TestChart: FC = () => {
+const Chart: FC = () => {
   const chart: any = useRef();
   const refContainer: any = useRef();
   const resizeObserver: any = useRef();
@@ -50,14 +50,13 @@ const TestChart: FC = () => {
   const [symbolsList, setSymbolsList]: any = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const onPeriodsClick = (e: any) => {
+    setIsLoading(true);
     setPeriod(e.key);
   };
   const onSymbolClick = (symbol: any) => {
+    setIsLoading(true);
     setSymbol(symbol.target.innerHTML);
   };
-  useEffect(() => {
-    console.log(symbol);
-  }, [symbol]);
   const getSymbols = async () => {
     const res: any = await axios({
       method: "get",
@@ -69,6 +68,10 @@ const TestChart: FC = () => {
     return res.data;
   };
   useEffect(() => {
+    console.log(isLoading);
+  }, [isLoading]);
+  useEffect(() => {
+    console.log("creating");
     getSymbols();
     chart.current = createChart(refContainer.current, {
       width: refContainer.current.clientWidth,
@@ -206,7 +209,13 @@ const TestChart: FC = () => {
               onMouseLeave={() => setIsSymbolDropDown(false)}
             >
               {symbolsList.map((el: any) => (
-                <div key={el.id} onClick={(e: any) => onSymbolClick(e)}>
+                <div
+                  key={el.id}
+                  onClick={(e: any) => {
+                    onSymbolClick(e);
+                    setIsSymbolDropDown(false);
+                  }}
+                >
                   {el.id}
                 </div>
               ))}
@@ -223,10 +232,19 @@ const TestChart: FC = () => {
               size="large"
               style={{
                 display: "flex",
+                width: "100%",
+                position: "absolute",
+                top: "0",
+                zIndex: "1000",
                 height: "100%",
                 justifyContent: "center",
                 alignItems: "center",
                 background: "#000",
+                // display: "flex",
+                // height: "100%",
+                // justifyContent: "center",
+                // alignItems: "center",
+                // background: "#000",
               }}
             />
           ) : (
@@ -237,4 +255,4 @@ const TestChart: FC = () => {
     </FramerWrapper>
   );
 };
-export default TestChart;
+export default Chart;

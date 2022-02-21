@@ -1,0 +1,43 @@
+.navbar-container
+    width: 100%
+    background-color: black
+    height: 60px
+    box-shadow: 0 1px 3px rgba(15, 15, 15, 0.13)
+    display: flex
+    align-items: center
+    padding: 0 1.5em
+    @include media("max", "md")
+        padding: 0 1.5em 0 0;
+    .logo
+        display: flex
+        position: absolute
+        left: 15px
+        .link-text
+            z-index: 10
+            cursor: pointer
+    .nav-links
+        display: flex
+        position: absolute
+        left: 0
+        align-items: center
+        width: 100%
+        justify-content: center
+        height: inherit
+    .login-section
+        display: flex
+        position: absolute
+        right: 10px
+.link-text-active
+    border-top: 2px solid #771e9b
+.mobile-links
+    .link-text
+        @include media("max", "md" )
+            font-size: 20px
+            display: flex
+            align-items: center
+            width: 155px
+            margin-left: 20px
+            svg
+                margin-right: 10px
+
+        

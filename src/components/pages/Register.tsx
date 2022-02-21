@@ -1,7 +1,5 @@
 import { FC, useContext, useState } from "react";
-import { Form, Input, Button, Checkbox } from "antd";
 import { useNavigate } from "react-router-dom";
-import { motion } from "framer-motion";
 import FramerWrapper from "../wrapper/FramerWrapper";
 import axios, { AxiosError } from "axios";
 import { AppContext } from "../../context/AppContext";
@@ -48,45 +46,29 @@ const Register: FC = () => {
     }
   };
   return (
-    // <motion.div
-    //   exit={{ opacity: 0 }}
-    //   animate={{ opacity: 1 }}
-    //   initial={{ opacity: 0 }}
-    //   className="page-wrapper"
-    // >
     <FramerWrapper>
       <div className="page-wrapper">
-        <div className="css-gradient2">
-          <div className="center">
-            <h1>Register</h1>
-            <form onSubmit={onSubmit}>
-              <div className="txt-field">
-                <input
-                  type="text"
-                  name="username"
-                  onChange={onChange}
-                  required
-                />
-                {/* <span></span> */}
-                <label>Username</label>
-              </div>
-              <div className="txt-field">
-                <input
-                  type="password"
-                  required
-                  name="password"
-                  onChange={onChange}
-                />
-                {/* <span></span> */}
-                <label>Password</label>
-              </div>
-              <input type="submit" value="Register" />
-              <div className="signup_link">
-                Already a member? <a onClick={redirect}>Sign up</a>
-              </div>
-            </form>
-          </div>
-          {/* </motion.div> */}
+        <div className="login-form">
+          <h1>Register</h1>
+          <form onSubmit={onSubmit}>
+            <div className="txt-field">
+              <input type="text" name="username" onChange={onChange} required />
+              <label>Username</label>
+            </div>
+            <div className="txt-field">
+              <input
+                type="password"
+                required
+                name="password"
+                onChange={onChange}
+              />
+              <label>Password</label>
+            </div>
+            <input type="submit" value="Register" />
+            <div className="signup_link">
+              Already a member? <a onClick={redirect}>Sign up</a>
+            </div>
+          </form>
         </div>
       </div>
     </FramerWrapper>

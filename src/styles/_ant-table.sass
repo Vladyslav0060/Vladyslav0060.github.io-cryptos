@@ -1,0 +1,60 @@
+@import 'variables'
+@import 'mixins'
+.ant-table
+    background-color: color('table-bg') !important
+    box-shadow: 0 8px 32px 0 #00000081 !important
+    backdrop-filter: blur( 4px ) !important
+    color: #f6f6f6 !important
+    -webkit-backdrop-filter: blur( 4px ) !important
+    border-radius: 10px !important
+    border: 1px solid rgba( 255, 255, 255, 0.18 ) !important
+    margin-top: 1.5vh !important;
+    .ant-table-tbody > tr.ant-table-row > td, .ant-table-tbody > tr > td
+        background: color('transparent') !important
+    .ant-table-cell
+        border-color: color('border-color') !important
+        .table-title
+            padding-left: 5px
+            position: relative
+
+    thead tr > th
+        color: white
+        background: map-get($colors, 'transparent') !important
+        border-color: color('border-color') !important
+    .ant-table-title
+        text-align: center
+    Input 
+        border: 1px solid black
+        border-radius: 5px
+    input
+        margin-left: 1rem
+        text-align: left
+        border-radius: 3px
+        background: #94919144
+        color: white
+        border: none
+        padding: 0
+        padding-inline: 5px
+        white-space: nowrap
+        &:focus
+            outline: none
+        @include media("max", "md")
+            width: 60%
+    @include media("max", "md")
+        border-radius: 0 !important
+        border: none !important
+        margin-top: 0 !important
+.table-col
+    display: flex
+    align-items: center
+    span 
+        &:last-child
+            color: #515458
+
+.ant-table-title
+    border-radius: 0 !important
+.ant-table-thead > tr > th,
+.ant-table-tbody > tr > td,
+.ant-table tfoot > tr > th,
+.ant-table tfoot > tr > td 
+    padding: 16px 7px !important

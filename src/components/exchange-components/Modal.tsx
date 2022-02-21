@@ -1,28 +1,9 @@
-import { FC, useContext, useEffect } from "react";
-import { AppContext } from "../../context/AppContext";
-import { actionTypes } from "../../reducers/AppReducer";
 import Modal from "react-modal";
-import axios from "axios";
 import { DeviceSize } from "../responsive";
 import { useMediaQuery } from "react-responsive";
-import { REGEXP_EMAIL } from "../regexp/Regexp";
-import { Form, Input, Button } from "antd";
+import { IContactMe } from "../../types/types";
 
-interface Props {
-  opened: boolean;
-  nModal: number;
-  symbols: any;
-  currentSymbol: any;
-  setCurrentSymbol: any;
-  setOpened: React.Dispatch<
-    React.SetStateAction<{
-      first: boolean;
-      second: boolean;
-    }>
-  >;
-}
-
-const ContactMe: FC<Props> = (props: Props): any => {
+const ContactMe: React.FC<IContactMe> = (props: IContactMe): any => {
   const closeModal = () => {
     props.setOpened((prevState) =>
       props.nModal === 1
@@ -30,12 +11,7 @@ const ContactMe: FC<Props> = (props: Props): any => {
         : { ...prevState, second: !props.opened }
     );
   };
-
   const isMobile = useMediaQuery({ maxWidth: DeviceSize.mobile });
-  const onFinish = async (e: any) => {
-    console.log("onfininsh worked", e);
-  };
-
   const customStyles = {
     content: {
       top: "50%",
@@ -59,7 +35,6 @@ const ContactMe: FC<Props> = (props: Props): any => {
         props.setCurrentSymbol(el);
       }
     });
-    // props.setCurrentSymbol(e.target.innerHTML);
     props.setOpened((prevState) =>
       props.nModal === 1
         ? { ...prevState, first: !props.opened }
@@ -73,21 +48,6 @@ const ContactMe: FC<Props> = (props: Props): any => {
       contentLabel="Example Modal"
       onRequestClose={closeModal}
     >
-      {/* <Form
-        name="basic"
-        labelCol={{ span: 8 }}
-        wrapperCol={{ span: 16 }}
-        initialValues={{ remember: true }}
-        onFinish={onFinish}
-        autoComplete="off"
-      >
-        <Form.Item>
-          <h2 className="form-item">
-            {props?.nModal === 1 ? <span>From:</span> : <span>To:</span>}
-          </h2>
-        </Form.Item>
-
-        <Form.Item> */}
       <h2 className="modal-title">
         {props.nModal === 1 ? "From" : "To"}:
         <span>
@@ -101,8 +61,6 @@ const ContactMe: FC<Props> = (props: Props): any => {
           </span>
         ))}
       </div>
-      {/* </Form.Item>
-      </Form> */}
     </Modal>
   );
 };

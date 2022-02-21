@@ -1,0 +1,67 @@
+.details-wrapper
+    @extend .page-wrapper
+    align-items: baseline !important
+    padding-top: 50px
+.details
+    display: flex
+    flex-direction: column
+    justify-content: top
+    align-items: center
+    width: 70%
+    height: max-content
+    min-height: 50%
+    background: #0000005b
+    border-radius: 5px
+    padding: 10px 2% 2% 2%
+    @include media("max", "md" )
+        width: 95vw
+        margin-top: 15px
+    h1,h3
+        color: white
+        margin: 0
+    > div
+        flex: 0.5
+    p
+        padding-top: 5px
+        padding-bottom: 5px
+    .title
+        display: flex
+        width: 100%
+        justify-content: center
+        overflow:visible
+        align-items: center
+        @include media("max", "md" )
+            flex-wrap: wrap
+        .col
+            @include media("max", "md" )
+                width: 100%
+            &:first-child
+                span
+                    align-self: center
+            &:last-child
+                display: flex
+                width: 60%
+                flex-direction: column
+                padding-top: 10px
+                align-self: flex-start
+                span
+                    font-size: 14px
+                    padding: 0
+                @include media("max", "md" )
+                    width: 100%
+            position: relative
+            overflow: hidden
+            display: flex
+            justify-content: start
+            width: 40%
+            img
+                width: 30%
+                border-radius: 20px
+                margin: 20px
+            span,p
+                padding: 20px
+                font-size: 2.5em
+.description
+    span
+        // background: red
+        // font-size: 2.5em
