@@ -13,15 +13,10 @@ const CoinInfo = () => {
   const [data, setData]: any = useState();
   const fetchData = async () => {
     const response = await axios.get(
-      "https://pro-api.coinmarketcap.com/v2/cryptocurrency/info",
-      {
-        params: { slug: id },
-        headers: {
-          "X-CMC_PRO_API_KEY": "597579ac-3dce-4c0a-8c29-863686119e3d",
-        },
-      }
+      "https://evening-island-58892.herokuapp.com/coin/coin-details",
+      { headers: { id: id } }
     );
-    setData(response.data.data[Object.keys(response.data.data)[0]]);
+    setData(response.data);
   };
   useEffect(() => {
     fetchData();
