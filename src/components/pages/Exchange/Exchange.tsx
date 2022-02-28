@@ -107,7 +107,7 @@ const Exchange: FC = () => {
                 <FontAwesomeIcon
                   className={isRotating ? "faSyncAlt-active" : "faSyncAlt"}
                   icon={faSyncAlt}
-                  color="black"
+                  color="#31c9fd"
                   onClick={switchCoins}
                 />
                 <input

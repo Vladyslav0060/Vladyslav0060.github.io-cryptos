@@ -193,7 +193,11 @@ const Chart: FC = () => {
               <DownOutlined />
             </a>
           </Dropdown>
-          <span onClick={() => setIsSymbolDropDown(!isSymbolDropDown)}>
+          <span
+            onClick={() => {
+              setIsSymbolDropDown(!isSymbolDropDown);
+            }}
+          >
             <a
               className="ant-dropdown-link"
               onClick={(e) => e.preventDefault()}
@@ -235,7 +239,7 @@ const Chart: FC = () => {
                 width: "100%",
                 position: "absolute",
                 top: "0",
-                zIndex: "1000",
+                zIndex: "100",
                 height: "100%",
                 justifyContent: "center",
                 alignItems: "center",

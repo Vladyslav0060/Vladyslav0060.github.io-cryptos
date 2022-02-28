@@ -54,7 +54,7 @@
     -webkit-box-align: center;
         -ms-flex-align: center;
             align-items: center;
-    width: 85vw;
+    width: 90vw;
   }
   .exchange-form:first-child div {
     -webkit-box-pack: end;
@@ -65,9 +65,6 @@
     -webkit-box-pack: start;
         -ms-flex-pack: start;
             justify-content: flex-start;
-  }
-  .exchange-form .exchange-col:first-child {
-    padding-top: 20px;
   }
   .exchange-form .exchange-col:last-child button {
     -webkit-box-ordinal-group: 4;
@@ -81,8 +78,22 @@
     width: 60vw !important;
   }
   .exchange-form .exchange-col img {
-    width: 30vw !important;
-    height: 30vw !important;
+    width: 15vh;
+    height: 15vh;
+  }
+}
+
+@media only screen and (max-width: 320px) {
+  .exchange-form .exchange-col img {
+    width: 10vw;
+    height: 10vw;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .exchange-form .exchange-col img {
+    width: 25vh;
+    height: 25vh;
   }
 }
 
@@ -100,9 +111,9 @@
           align-items: center;
   width: 33%;
   height: 100%;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -webkit-box-pack: center !important;
+      -ms-flex-pack: center !important;
+          justify-content: center !important;
 }
 
 .exchange-col input {
@@ -111,7 +122,7 @@
 }
 
 .exchange-col button, .exchange-col input {
-  background: rgba(0, 0, 0, 0.63);
+  background: #8f2ae760;
   color: white;
   padding: 7px 13px;
   outline: none;
@@ -122,8 +133,8 @@
 }
 
 .exchange-col img {
-  width: 15vw;
-  height: 15vw;
+  width: 15vh;
+  height: 15vh;
 }
 
 .exchange-col svg {
@@ -620,10 +631,12 @@
   min-width: -webkit-fit-content !important;
   min-width: -moz-fit-content !important;
   min-width: fit-content !important;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji !important;
+  font-size: 14px !important;
+  font-variant: all-small-caps !important;
 }
 
 .page-wrapper, .details-wrapper {
-  height: calc(100vh - 60px);
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -636,6 +649,11 @@
           align-items: center;
   background: linear-gradient(342deg, #5912aa02, #08c5a6, #5a196e);
   background-size: 600% 600%;
+  min-height: calc(100vh - 60px);
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+  padding-bottom: 50px;
   -webkit-animation: AnimationName 10s ease infinite;
           animation: AnimationName 10s ease infinite;
 }
@@ -655,8 +673,8 @@
 .coinlist-wrapper {
   -webkit-animation: animateBg 100000s linear infinite;
           animation: animateBg 100000s linear infinite;
-  background-image: -webkit-gradient(linear, right top, left top, from(#5635ad6e), color-stop(#006fbf66), to(#b94fff57));
-  background-image: linear-gradient(to left, #5635ad6e, #006fbf66, #b94fff57);
+  background-image: -webkit-gradient(linear, right top, left top, from(#5635ad6e), color-stop(#5635ad6e), to(#b94fff57));
+  background-image: linear-gradient(to left, #5635ad6e, #5635ad6e, #b94fff57);
   height: -webkit-max-content;
   height: -moz-max-content;
   height: max-content;

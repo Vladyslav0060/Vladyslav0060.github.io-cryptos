@@ -1,6 +1,4 @@
-import { BrowserRouter as Router, Outlet, useParams } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {} from "@fortawesome/free-solid-svg-icons";
+import { useParams } from "react-router-dom";
 import { TwitterOutlined } from "@ant-design/icons";
 import axios from "axios";
 import { useEffect, useState } from "react";
@@ -21,9 +19,6 @@ const CoinInfo = () => {
   useEffect(() => {
     fetchData();
   }, [id]);
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
   return (
     <FramerWrapper>
       <div className="details-wrapper">
