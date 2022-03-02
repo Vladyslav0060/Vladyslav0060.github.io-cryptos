@@ -144,7 +144,6 @@
 
 .modal-exchange {
   color: white;
-  height: 500px;
   min-width: 550px;
   overflow-x: hidden;
   -webkit-box-sizing: border-box;
@@ -185,6 +184,7 @@
 
 .modal-exchange-child {
   text-align: center;
+  height: 30px;
 }
 
 .modal-exchange-child:hover {
@@ -212,6 +212,22 @@
   -moz-animation: spin 0.25s linear infinite;
 }
 
+.exchange-label {
+  cursor: pointer;
+}
+
+.exchange-label:hover {
+  color: #b1b1b1;
+}
+
+.modal-title input {
+  margin-bottom: 1rem;
+  color: white;
+  border: none;
+  outline: none;
+  background-color: #cdcdcd73;
+}
+
 .ant-table {
   background-color: #ffffff00 !important;
   -webkit-box-shadow: 0 8px 32px 0 #00000081 !important;
@@ -226,6 +242,7 @@
 
 .ant-table .ant-table-tbody > tr.ant-table-row > td, .ant-table .ant-table-tbody > tr > td {
   background: #ffffff00 !important;
+  cursor: default;
 }
 
 .ant-table .ant-table-cell {
@@ -319,6 +336,10 @@
       -ms-flex-align: center;
           align-items: center;
   padding: 0 1.5em;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 10;
 }
 
 @media only screen and (max-width: 768px) {
@@ -383,6 +404,27 @@
   .mobile-links .link-text svg {
     margin-right: 10px;
   }
+}
+
+#go-top {
+  position: fixed;
+  bottom: 30px;
+  right: 10px;
+  cursor: pointer;
+  display: none;
+  text-align: center;
+  width: 35px;
+  height: 35px;
+  border-radius: 50px;
+  background: #00c6e0;
+}
+
+#go-top h2 {
+  color: white;
+}
+
+#go-top:hover {
+  background: #006695;
 }
 
 .login-form {
@@ -691,5 +733,46 @@
   .coinlist-wrapper .content {
     margin: 0 0 0 0;
   }
+}
+
+.ant-dropdown ul {
+  border: 1px solid #3e3e3e;
+  background-color: #171a1e;
+  margin-top: 2px;
+}
+
+.ant-dropdown li {
+  color: #fff;
+}
+
+.ant-dropdown li:hover {
+  color: #eab522;
+}
+
+.symbols-menu {
+  position: absolute;
+  left: 100px;
+  border: 1px solid #3e3e3e;
+  text-align: center;
+  height: 296px;
+  width: 120px;
+  overflow: auto;
+  will-change: transform;
+  direction: ltr;
+  background-color: #171a1e;
+  z-index: 100;
+  text-align: start;
+  border-radius: 2px;
+  margin-top: 3px;
+}
+
+.symbols-menu li {
+  text-align: center;
+  padding: 5px 0px 5px 0px;
+}
+
+.symbols-menu li:hover {
+  background: white;
+  color: #eab522;
 }
 /*# sourceMappingURL=styles.css.map */

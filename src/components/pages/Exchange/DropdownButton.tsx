@@ -1,6 +1,8 @@
 const buttonLabel = (symbol: any) => {
   return (
-    <>{symbol?.id.toUpperCase() + "(" + symbol?.symbol.toUpperCase() + ") ▼"}</>
+    <div className="exchange-label">
+      {symbol?.id.toUpperCase() + "(" + symbol?.symbol.toUpperCase() + ") ▼"}
+    </div>
   );
 };
 interface IProps {

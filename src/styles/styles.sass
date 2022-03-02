@@ -1,4 +1,3 @@
-// @import 'ant-table','variables','mixins','exchange'
 @import 'variables','mixins','exchange','ant-table','navbar','login','coin-info'
 @use "sass:map"
 body
@@ -28,12 +27,7 @@ body
         color: red
 .coinlist-wrapper 
     animation: animateBg 100000s linear infinite
-    // background-image: linear-gradient(212deg, #4d817e, #14191b85,#43c36e)
-    background-image: linear-gradient(to left, #5635ad6e, #5635ad6e, #b94fff57);
-    // background-image: #fff
-    // background: radial-gradient(circle at 50% 0,rgba(255,0,0,.5),rgba(255,0,0,0) 70.71%),radial-gradient(circle at 6.7% 75%,rgba(0,0,255,.5),rgba(0,0,255,0) 70.71%),radial-gradient(circle at 93.3% 75%,rgba(0,255,0,.5),rgba(0,255,0,0) 70.71%) 
-    // background: black
-    // background-size: 400% 100%
+    background-image: linear-gradient(to left, #5635ad6e, #5635ad6e, #b94fff57)
     height: max-content
     .content
         margin-left: 10%
@@ -43,4 +37,34 @@ body
         @include media("max", "md") 
             margin: 0 0 0 0
             // font-family: ui-rounded
+.ant-dropdown
+    ul
+        border: 1px solid #3e3e3e
+        background-color: #171a1e
+        margin-top: 2px
+    li
+        color: #fff
+        &:hover
+            color: #eab522
+.symbols-menu
+    position: absolute
+    left: 100px
+    border: 1px solid #3e3e3e
+    text-align: center
+    height: 296px
+    width: 120px
+    overflow: auto
+    will-change: transform
+    direction: ltr
+    background-color: rgb(23, 26, 30)
+    z-index: 100
+    text-align: start
+    border-radius: 2px
+    margin-top: 3px
+    li
+        text-align: center
+        padding: 5px 0px 5px 0px
+        &:hover
+            background: white
+            color: #eab522
 

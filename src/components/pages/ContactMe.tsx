@@ -7,6 +7,7 @@ import { DeviceSize } from "../responsive";
 import { useMediaQuery } from "react-responsive";
 import { REGEXP_EMAIL } from "../regexp/Regexp";
 import { Form, Input, Button } from "antd";
+import { RegisterButton } from "../navbar/styled";
 import FramerWrapper from "../wrapper/FramerWrapper";
 import Notification from "../Notification";
 interface Props {
@@ -129,12 +130,13 @@ const ContactMe: FC<Props> = (props: Props) => {
               margin: "0",
             }}
           >
-            <Button
+            {/* <Button
               style={{ background: "#9d67f1", color: "white", border: "none" }}
               htmlType="submit"
             >
               Send
-            </Button>
+            </Button> */}
+            <RegisterButton type="submit">Send</RegisterButton>
           </Form.Item>
         </Form>
       </FramerWrapper>

@@ -4,13 +4,10 @@ import Spinner from "./Spinner";
 import Modal from "../../exchange-components/Modal";
 import { faSyncAlt } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useMediaQuery } from "react-responsive";
-import { DeviceSize } from "../../responsive";
 import { motion } from "framer-motion";
 import FramerWrapper from "../../wrapper/FramerWrapper";
 import DropdownButton from "./DropdownButton";
 const Exchange: FC = () => {
-  const isMobile = useMediaQuery({ maxWidth: DeviceSize.mobile });
   let isInitial = true;
   const [modalsOpened, setModalsOpened] = useState({
     first: false,
@@ -37,7 +34,7 @@ const Exchange: FC = () => {
     isInitial = false;
   };
   useEffect(() => {
-    const interval = setInterval(() => request(), 2000);
+    const interval = setInterval(() => request(), 20000);
     return () => clearInterval(interval);
   }, []);
   useEffect(() => {
@@ -48,7 +45,6 @@ const Exchange: FC = () => {
   const roundNumber = () => {
     let testNum = (amount * firstSymbol?.price) / secondSymbol?.price;
     const firstpart = testNum.toString().split(".")[0];
-    console.log("FP", firstpart[0]);
     switch (firstpart[0]) {
       case "0":
         return ((amount * firstSymbol?.price) / secondSymbol?.price).toFixed(7);

@@ -34,6 +34,7 @@ const ChartContainerRef = styled.div`
   width: 100%;
   height: calc(100vh - 85px);
   position: relative;
+  z-index: 1;
 `;
 const antLoadingIcon = (
   <LoadingOutlined style={{ fontSize: "80", color: "white" }} spin />
@@ -50,6 +51,7 @@ const Chart: FC = () => {
   const [symbolsList, setSymbolsList]: any = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const onPeriodsClick = (e: any) => {
+    setIsSymbolDropDown(false);
     setIsLoading(true);
     setPeriod(e.key);
   };
@@ -68,10 +70,6 @@ const Chart: FC = () => {
     return res.data;
   };
   useEffect(() => {
-    console.log(isLoading);
-  }, [isLoading]);
-  useEffect(() => {
-    console.log("creating");
     getSymbols();
     chart.current = createChart(refContainer.current, {
       width: refContainer.current.clientWidth,
@@ -105,7 +103,10 @@ const Chart: FC = () => {
   }, []);
 
   const periodsDropdownMenu = (
-    <Menu onClick={onPeriodsClick}>
+    <Menu
+      onClick={onPeriodsClick}
+      // style={{ border: "1px solid #3e3e3e", backgroundColor: "#171a1e" }}
+    >
       <Menu.Item key="m1">1 min</Menu.Item>
       <Menu.Item key="m5">5 min</Menu.Item>
       <Menu.Item key="m15">15 min</Menu.Item>
@@ -182,7 +183,10 @@ const Chart: FC = () => {
           <Dropdown overlay={periodsDropdownMenu} trigger={["click"]}>
             <a
               className="ant-dropdown-link"
-              onClick={(e) => e.preventDefault()}
+              onClick={(e) => {
+                e.preventDefault();
+                setIsSymbolDropDown(false);
+              }}
               style={{
                 color: "#7e8896",
                 marginLeft: "10px",
@@ -208,12 +212,14 @@ const Chart: FC = () => {
             </a>
           </span>
           {isSymbolDropDown && !isLoading ? (
-            <SymbolMenu
-              onMouseEnter={() => setIsSymbolDropDown(true)}
-              onMouseLeave={() => setIsSymbolDropDown(false)}
+            <ul
+              className="symbols-menu"
+              onClick={() => setIsSymbolDropDown(!isSymbolDropDown)}
+              // onMouseEnter={() => setIsSymbolDropDown(true)}
+              // onMouseLeave={() => setIsSymbolDropDown(false)}
             >
               {symbolsList.map((el: any) => (
-                <div
+                <li
                   key={el.id}
                   onClick={(e: any) => {
                     onSymbolClick(e);
@@ -221,9 +227,9 @@ const Chart: FC = () => {
                   }}
                 >
                   {el.id}
-                </div>
+                </li>
               ))}
-            </SymbolMenu>
+            </ul>
           ) : (
             <></>
           )}
@@ -244,11 +250,6 @@ const Chart: FC = () => {
                 justifyContent: "center",
                 alignItems: "center",
                 background: "#000",
-                // display: "flex",
-                // height: "100%",
-                // justifyContent: "center",
-                // alignItems: "center",
-                // background: "#000",
               }}
             />
           ) : (

@@ -85,3 +85,6 @@ input::-webkit-inner-spin-button {
     background-position: 55% 0%;
   }
 }
+input::placeholder {
+  color: rgb(199, 199, 199);
+}
