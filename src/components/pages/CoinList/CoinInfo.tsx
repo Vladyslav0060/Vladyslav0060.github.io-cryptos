@@ -39,11 +39,8 @@ const CoinInfo = () => {
                       : !data?.contract_address.length
                       ? "Not found!"
                       : data?.contract_address.map((el: any) => (
-                          <div>
-                            <span>
-                              {console.log(el.contract_address.length)}
-                              {el.contract_address}
-                            </span>
+                          <div key={el.contract_address}>
+                            <span>{el.contract_address}</span>
                           </div>
                         ))}
                   </span>
