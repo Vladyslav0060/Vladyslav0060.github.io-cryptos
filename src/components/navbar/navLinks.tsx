@@ -48,7 +48,9 @@ export function NavLinks() {
             })
           }
         >
-          <span className="link-text">Contact</span>
+          <span className="link-text" style={{ cursor: "pointer" }}>
+            Contact
+          </span>
         </LinkItem>
       </LinksWrapper>
     </NavLinksContainer>
