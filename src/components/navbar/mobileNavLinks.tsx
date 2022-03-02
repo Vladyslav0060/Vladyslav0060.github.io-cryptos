@@ -79,7 +79,9 @@ export function MobileNavLinks() {
             >
               <FontAwesomeIcon icon={faComment} size="2x" color="white" />
               <a href="#">
-                <span style={{ cursor: "pointer" }}>Contact</span>
+                <span style={{ cursor: "pointer", color: "white" }}>
+                  Contact
+                </span>
               </a>
             </section>
             <div>
