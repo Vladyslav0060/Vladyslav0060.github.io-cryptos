@@ -3,7 +3,6 @@ import Accessibility from "./accessibility";
 import MenuToggle from "./menuToggle";
 import { NavLink } from "react-router-dom";
 import {
-  faHome,
   faChartBar,
   faListAlt,
   faExchangeAlt,
