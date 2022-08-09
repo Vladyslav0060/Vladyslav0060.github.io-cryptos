@@ -22,13 +22,12 @@ const Register: FC = () => {
     event.preventDefault();
     try {
       const response: any = await axios.post(
-        "https://evening-island-58892.herokuapp.com/auth/registration",
+        "https://cryptopia-backend.herokuapp.com/auth/registration",
         {
           username: username,
           password: password,
         }
       );
-      console.log(response);
       const { token } = response.data;
       localStorage.setItem("token", token);
       dispatch({ type: actionTypes.SET_IS_LOGGED_IN, payload: true });

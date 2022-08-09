@@ -11,7 +11,7 @@ const CoinInfo = () => {
   const [data, setData]: any = useState();
   const fetchData = async () => {
     const response = await axios.get(
-      "https://evening-island-58892.herokuapp.com/coin/coin-details",
+      "https://cryptopia-backend.herokuapp.com/coin/coin-details",
       { headers: { id: id } }
     );
     setData(response.data);

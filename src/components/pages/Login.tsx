@@ -19,13 +19,12 @@ const Login: FC = () => {
     event.preventDefault();
     try {
       const response: any = await axios.post(
-        "https://evening-island-58892.herokuapp.com/auth/login",
+        "https://cryptopia-backend.herokuapp.com/auth/login",
         {
           username: username,
           password: password,
         }
       );
-      console.log(response);
       const { token } = response.data;
       localStorage.setItem("token", token);
       dispatch({ type: actionTypes.SET_IS_LOGGED_IN, payload: true });

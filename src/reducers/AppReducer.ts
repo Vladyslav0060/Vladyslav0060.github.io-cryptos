@@ -30,7 +30,6 @@ type AppPayload = {
 };
 export type AppActions = ActionMap<AppPayload>[keyof ActionMap<AppPayload>];
 export const AppReducer = (state: initStateType, action: AppActions) => {
-  console.log("Entered", action);
   switch (action.type) {
     case actionTypes.ADD_SYMBOLS:
       return { ...state, symbols: [...state.symbols, action.payload] };

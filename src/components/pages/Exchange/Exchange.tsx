@@ -21,9 +21,8 @@ const Exchange: FC = () => {
   const [isLoading, setIsLoading]: any = useState(true);
 
   const request = async () => {
-    console.log("request");
     const result = await axios(
-      "https://evening-island-58892.herokuapp.com/coin/assetsExchange"
+      "https://cryptopia-backend.herokuapp.com/coin/assetsExchange"
     );
     if (result.status === 200) setIsLoading(false);
     setResponse(result.data);
@@ -39,8 +38,6 @@ const Exchange: FC = () => {
   }, []);
   useEffect(() => {
     if (firstSymbol === undefined || secondSymbol === undefined) return;
-    console.log(firstSymbol);
-    console.log(firstSymbol?.price / secondSymbol?.price);
   }, [firstSymbol, secondSymbol]);
   const roundNumber = () => {
     let testNum = (amount * firstSymbol?.price) / secondSymbol?.price;

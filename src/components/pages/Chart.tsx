@@ -62,10 +62,9 @@ const Chart: FC = () => {
   const getSymbols = async () => {
     const res: any = await axios({
       method: "get",
-      url: "https://evening-island-58892.herokuapp.com/coin/symbols",
+      url: "https://cryptopia-backend.herokuapp.com/coin/symbols",
     });
 
-    console.log(res.data);
     setSymbolsList(res.data);
     return res.data;
   };
@@ -123,17 +122,15 @@ const Chart: FC = () => {
     fetchData();
   }, [period, symbol]);
   const fetchData = async () => {
-    console.log("FETCHDATA", symbol, period);
     const res: any = await axios({
       method: "get",
-      url: "https://evening-island-58892.herokuapp.com/coin/ohlc",
+      url: "https://cryptopia-backend.herokuapp.com/coin/ohlc",
       params: {
         interval: period,
         baseId: symbol,
         quoteId: "tether",
       },
     });
-    console.log(res);
     const { ohlcData, volumesData } = res.data;
     if (ohlcData.length && volumesData.length) setIsLoading(false);
     candlestickSeries.current.setData([]);

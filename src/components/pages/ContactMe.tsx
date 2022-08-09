@@ -26,7 +26,7 @@ const ContactMe: FC<Props> = (props: Props) => {
     });
   };
   const sendMessage = (values: any) => {
-    axios.post("https://evening-island-58892.herokuapp.com/mailer/text-mail", {
+    axios.post("https://cryptopia-backend.herokuapp.com/mailer/text-mail", {
       to: values["email"],
       subject: values["name"],
       text: values["message"],
@@ -38,7 +38,6 @@ const ContactMe: FC<Props> = (props: Props) => {
     if (REGEXP_EMAIL.test(values["email"])) {
       try {
         sendMessage(values);
-        console.log("Success:", values);
         Notification({
           message: `Thanks for you message!`,
           duration: 2,

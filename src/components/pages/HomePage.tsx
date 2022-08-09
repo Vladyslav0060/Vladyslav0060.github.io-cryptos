@@ -1,15 +1,7 @@
-import { FC, useContext, useEffect } from "react";
-import { AppContext } from "../../context/AppContext";
-import { motion } from "framer-motion";
+import { FC } from "react";
 import FramerWrapper from "../wrapper/FramerWrapper";
+
 const HomePage: FC = () => {
-  const {
-    state: { isContactModalOpen },
-    dispatch,
-  } = useContext(AppContext);
-  useEffect(() => {
-    console.log(isContactModalOpen);
-  }, [isContactModalOpen]);
   return (
     <FramerWrapper>
       <div className="home-wrapper">

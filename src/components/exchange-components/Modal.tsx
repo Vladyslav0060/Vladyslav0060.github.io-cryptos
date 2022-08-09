@@ -42,7 +42,6 @@ const ContactMe: React.FC<IContactMe> = (props: IContactMe): any => {
   };
   const onSubmit = (e: any) => {
     const symbol = e.target.innerHTML.split(" ")[0].toLowerCase();
-    console.log(symbol);
     props.symbols.forEach((el: any) => {
       if (el.symbol === symbol) {
         props.setCurrentSymbol(el);

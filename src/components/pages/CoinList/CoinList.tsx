@@ -16,7 +16,7 @@ const CoinList: FC = () => {
   }, []);
   const request = async () => {
     const response = await axios.get(
-      "https://evening-island-58892.herokuapp.com/coin/assets"
+      "https://cryptopia-backend.herokuapp.com/coin/assets"
     );
     setFetchedData(response.data);
   };
